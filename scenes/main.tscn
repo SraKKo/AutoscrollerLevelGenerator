@@ -1,6 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://dflbyj8krg1o7"]
+[gd_scene load_steps=6 format=3 uid="uid://dflbyj8krg1o7"]
 
-[ext_resource type="Script" uid="uid://f1cn8f4xinnl" path="res://scripts/main.gd" id="1_m8mrb"]
+[ext_resource type="Script" uid="uid://f1cn8f4xinnl" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/graph_level_generator.gd" id="2_generator"]
+[ext_resource type="Script" path="res://scripts/graph_renderer.gd" id="3_renderer"]
+[ext_resource type="Script" path="res://scripts/camera_control.gd" id="4_camera"]
+[ext_resource type="Script" path="res://scripts/graph_demo_hud.gd" id="5_hud"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_m8mrb")
+script = ExtResource("1_main")
+
+[node name="LevelGenerator" type="Node" parent="."]
+script = ExtResource("2_generator")
+
+[node name="GraphRenderer" type="Node2D" parent="."]
+script = ExtResource("3_renderer")
+
+[node name="CameraControl" type="Camera2D" parent="."]
+enabled = true
+script = ExtResource("4_camera")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("5_hud")
+
+[node name="Panel" type="ColorRect" parent="HUD"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 930.0
+offset_bottom = 162.0
+mouse_filter = 2
+color = Color(0.02, 0.03, 0.05, 0.82)
+
+[node name="Info" type="Label" parent="HUD/Panel"]
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 890.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 21
+text = "Proceduralny graf poziomu"
