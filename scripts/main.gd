@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var random_seed := 12345
+@export var random_seed := 54321
 
 var level: Dictionary = {}
 var use_dfs := false
@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("generate_level"):
-		_generate_level(int(Time.get_unix_time_from_system()))
+		_generate_level(random_seed + 1)
 	elif event.is_action_pressed("toggle_validation_method"):
 		use_dfs = not use_dfs
 		_revalidate_current_level()
