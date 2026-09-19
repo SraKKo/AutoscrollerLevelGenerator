@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdbqru3iibgfg"]
+
+[ext_resource type="Script" uid="uid://cp5mmeorb3o0j" path="res://scripts/chunk_room_demo.gd" id="1_qsk7l"]
+
+[node name="ChunkRoomDemo" type="Node2D"]
+script = ExtResource("1_qsk7l")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="ColorRect" parent="HUD"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 904.0
+offset_bottom = 162.0
+mouse_filter = 2
+color = Color(0.02, 0.03, 0.05, 0.78)
+
+[node name="Info" type="Label" parent="HUD/Panel"]
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 866.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Scena chunkow PNG - pokoje generowane proceduralnie"

@@ -1,0 +1,1145 @@
+{
+  "size": [
+    1088,
+    544
+  ],
+  "corridor_height": 128,
+  "outline_width": 4,
+  "coordinate_origin": "top-left",
+  "direction": "left-to-right",
+  "chunks": {
+    "Start": {
+      "file": "Start.png",
+      "ports": {
+        "left": [],
+        "right": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "R:272"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            136,
+            208
+          ],
+          [
+            1104,
+            208
+          ],
+          [
+            1104,
+            336
+          ],
+          [
+            136,
+            336
+          ]
+        ]
+      ]
+    },
+    "Finish": {
+      "file": "Finish.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ],
+        "right": []
+      },
+      "connected_port_groups": [
+        [
+          "L:272"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            952,
+            208
+          ],
+          [
+            952,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ]
+      ]
+    },
+    "StraightRoom": {
+      "file": "StraightRoom.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ],
+        "right": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:272",
+          "R:272"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            272,
+            208
+          ],
+          [
+            816,
+            208
+          ],
+          [
+            1104,
+            208
+          ],
+          [
+            1104,
+            336
+          ],
+          [
+            816,
+            336
+          ],
+          [
+            272,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ]
+      ]
+    },
+    "StraightUpper": {
+      "file": "StraightUpper.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ],
+        "right": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:136",
+          "R:136"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            272,
+            72
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            1104,
+            72
+          ],
+          [
+            1104,
+            200
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            272,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ]
+      ]
+    },
+    "StraightLower": {
+      "file": "StraightLower.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:408",
+          "R:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            272,
+            344
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            1104,
+            344
+          ],
+          [
+            1104,
+            472
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            272,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ]
+      ]
+    },
+    "GoingUp": {
+      "file": "GoingUp.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:408",
+          "R:136"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            272,
+            344
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            1104,
+            72
+          ],
+          [
+            1104,
+            200
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            272,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ]
+      ]
+    },
+    "GoingDown": {
+      "file": "GoingDown.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ],
+        "right": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:136",
+          "R:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            272,
+            72
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            1104,
+            344
+          ],
+          [
+            1104,
+            472
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            272,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ]
+      ]
+    },
+    "RiseToUpper": {
+      "file": "RiseToUpper.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ],
+        "right": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:272",
+          "R:136"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            272,
+            208
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            1104,
+            72
+          ],
+          [
+            1104,
+            200
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            272,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ]
+      ]
+    },
+    "DropToLower": {
+      "file": "DropToLower.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ],
+        "right": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:272",
+          "R:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            272,
+            208
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            1104,
+            344
+          ],
+          [
+            1104,
+            472
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            272,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ]
+      ]
+    },
+    "UpperToMiddle": {
+      "file": "UpperToMiddle.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ],
+        "right": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:136",
+          "R:272"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            272,
+            72
+          ],
+          [
+            816,
+            208
+          ],
+          [
+            1104,
+            208
+          ],
+          [
+            1104,
+            336
+          ],
+          [
+            816,
+            336
+          ],
+          [
+            272,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ]
+      ]
+    },
+    "LowerToMiddle": {
+      "file": "LowerToMiddle.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:408",
+          "R:272"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            272,
+            344
+          ],
+          [
+            816,
+            208
+          ],
+          [
+            1104,
+            208
+          ],
+          [
+            1104,
+            336
+          ],
+          [
+            816,
+            336
+          ],
+          [
+            272,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ]
+      ]
+    },
+    "SplitRoom": {
+      "file": "SplitRoom.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ],
+        "right": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          },
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:272",
+          "R:136",
+          "R:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            272,
+            208
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            1104,
+            72
+          ],
+          [
+            1104,
+            200
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            272,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ],
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            272,
+            208
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            1104,
+            344
+          ],
+          [
+            1104,
+            472
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            272,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ]
+      ]
+    },
+    "DoubleStraight": {
+      "file": "DoubleStraight.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          },
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          },
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:136",
+          "R:136"
+        ],
+        [
+          "L:408",
+          "R:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            272,
+            72
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            1104,
+            72
+          ],
+          [
+            1104,
+            200
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            272,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ],
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            272,
+            344
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            1104,
+            344
+          ],
+          [
+            1104,
+            472
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            272,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ]
+      ]
+    },
+    "KeepUpper": {
+      "file": "KeepUpper.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          },
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:136",
+          "R:136"
+        ],
+        [
+          "L:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            272,
+            72
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            1104,
+            72
+          ],
+          [
+            1104,
+            200
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            272,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ],
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            680,
+            344
+          ],
+          [
+            680,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ]
+      ]
+    },
+    "KeepLower": {
+      "file": "KeepLower.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          },
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ]
+      },
+      "connected_port_groups": [
+        [
+          "L:408",
+          "R:408"
+        ],
+        [
+          "L:136"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            272,
+            344
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            1104,
+            344
+          ],
+          [
+            1104,
+            472
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            272,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ],
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            680,
+            72
+          ],
+          [
+            680,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ]
+      ]
+    },
+    "DeadEnd": {
+      "file": "DeadEnd.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 272,
+            "top": 208,
+            "bottom": 336
+          }
+        ],
+        "right": []
+      },
+      "connected_port_groups": [
+        [
+          "L:272"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            208
+          ],
+          [
+            816,
+            208
+          ],
+          [
+            816,
+            336
+          ],
+          [
+            -16,
+            336
+          ]
+        ]
+      ]
+    },
+    "DeadEndUpper": {
+      "file": "DeadEndUpper.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 136,
+            "top": 72,
+            "bottom": 200
+          }
+        ],
+        "right": []
+      },
+      "connected_port_groups": [
+        [
+          "L:136"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            72
+          ],
+          [
+            816,
+            72
+          ],
+          [
+            816,
+            200
+          ],
+          [
+            -16,
+            200
+          ]
+        ]
+      ]
+    },
+    "DeadEndLower": {
+      "file": "DeadEndLower.png",
+      "ports": {
+        "left": [
+          {
+            "center_y": 408,
+            "top": 344,
+            "bottom": 472
+          }
+        ],
+        "right": []
+      },
+      "connected_port_groups": [
+        [
+          "L:408"
+        ]
+      ],
+      "walkable_polygons_union": [
+        [
+          [
+            -16,
+            344
+          ],
+          [
+            816,
+            344
+          ],
+          [
+            816,
+            472
+          ],
+          [
+            -16,
+            472
+          ]
+        ]
+      ]
+    }
+  },
+  "example": [
+    "Start",
+    "SplitRoom",
+    "DoubleStraight",
+    "KeepUpper",
+    "GoingDown",
+    "LowerToMiddle",
+    "StraightRoom",
+    "Finish"
+  ]
+}
