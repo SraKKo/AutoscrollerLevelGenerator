@@ -27,4 +27,3 @@ func _render_rooms() -> void:
 func _reset_gameplay_view() -> void:
 	autoscroll_camera.reset_to(START_CAMERA_POSITION)
 	player.reset_to_spawn()
-

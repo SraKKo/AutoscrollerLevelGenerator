@@ -1,23 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7dg7oyukw61a"]
+[gd_scene load_steps=10 format=3 uid="uid://b7dg7oyukw61a"]
 
-[ext_resource type="Script" path="res://scripts/game_proper.gd" id="1_game"]
-[ext_resource type="Script" uid="uid://c0lvc2gdapcxc" path="res://scripts/chunk_rooms_renderer.gd" id="2_rjmbi"]
+[ext_resource type="Script" uid="uid://ck14qxwedny7x" path="res://scripts/game_proper.gd" id="1_game"]
 [ext_resource type="Script" uid="uid://d3w7vdiwvo2ie" path="res://scripts/chunk_graph_debug.gd" id="3_tf84m"]
 [ext_resource type="Script" uid="uid://c5dv7jivh62ap" path="res://scripts/route_signs.gd" id="4_opa2n"]
 [ext_resource type="Script" uid="uid://eu831oaly4l2" path="res://scripts/camera_control.gd" id="5_r2b87"]
 [ext_resource type="Script" uid="uid://vdngxuk1fnry" path="res://scripts/chunk_demo_hud.gd" id="6_eavuh"]
-[ext_resource type="Script" path="res://scripts/player_controller.gd" id="7_player"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="8_icon"]
-[ext_resource type="Script" path="res://scripts/autoscroll_camera.gd" id="9_camera"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
-size = Vector2(42, 42)
+[ext_resource type="PackedScene" uid="uid://dbnfkxo2x8fpe" path="res://scenes/player.tscn" id="7_player"]
+[ext_resource type="Script" uid="uid://ycj1okum8rb1" path="res://scripts/autoscroll_camera.gd" id="9_camera"]
+[ext_resource type="Script" uid="uid://cs2ipvivygiww" path="res://scripts/game_chunk_scene_renderer.gd" id="10_chunk_scenes"]
+[ext_resource type="PackedScene" uid="uid://cpc12wvrkeu0n" path="res://scenes/cave_background.tscn" id="11_background"]
 
 [node name="GameProper" type="Node2D"]
 script = ExtResource("1_game")
+random_seed = 243
+
+[node name="CaveBackground" parent="." instance=ExtResource("11_background")]
+layer = -10
+scroll_ignore_camera_zoom = true
 
 [node name="Rooms" type="Node2D" parent="."]
-script = ExtResource("2_rjmbi")
+script = ExtResource("10_chunk_scenes")
 
 [node name="GraphDebug" type="Node2D" parent="."]
 script = ExtResource("3_tf84m")
@@ -29,22 +31,11 @@ script = ExtResource("4_opa2n")
 enabled = false
 script = ExtResource("5_r2b87")
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("7_player")]
 position = Vector2(-350, 0)
-z_index = 20
-script = ExtResource("7_player")
-camera_path = NodePath("../AutoscrollCamera")
-
-[node name="Icon" type="Sprite2D" parent="Player"]
-texture = ExtResource("8_icon")
-scale = Vector2(0.32, 0.32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_player")
 
 [node name="AutoscrollCamera" type="Camera2D" parent="."]
 position = Vector2(256, 0)
-enabled = true
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 script = ExtResource("9_camera")
