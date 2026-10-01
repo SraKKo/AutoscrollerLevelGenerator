@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7dg7oyukw61a"]
+
+[ext_resource type="Script" path="res://scripts/game_proper.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://c0lvc2gdapcxc" path="res://scripts/chunk_rooms_renderer.gd" id="2_rjmbi"]
+[ext_resource type="Script" uid="uid://d3w7vdiwvo2ie" path="res://scripts/chunk_graph_debug.gd" id="3_tf84m"]
+[ext_resource type="Script" uid="uid://c5dv7jivh62ap" path="res://scripts/route_signs.gd" id="4_opa2n"]
+[ext_resource type="Script" uid="uid://eu831oaly4l2" path="res://scripts/camera_control.gd" id="5_r2b87"]
+[ext_resource type="Script" uid="uid://vdngxuk1fnry" path="res://scripts/chunk_demo_hud.gd" id="6_eavuh"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="7_player"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="8_icon"]
+[ext_resource type="Script" path="res://scripts/autoscroll_camera.gd" id="9_camera"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(42, 42)
+
+[node name="GameProper" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="Rooms" type="Node2D" parent="."]
+script = ExtResource("2_rjmbi")
+
+[node name="GraphDebug" type="Node2D" parent="."]
+script = ExtResource("3_tf84m")
+
+[node name="RouteSigns" type="Node2D" parent="."]
+script = ExtResource("4_opa2n")
+
+[node name="CameraControl" type="Camera2D" parent="."]
+enabled = false
+script = ExtResource("5_r2b87")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-350, 0)
+z_index = 20
+script = ExtResource("7_player")
+camera_path = NodePath("../AutoscrollCamera")
+
+[node name="Icon" type="Sprite2D" parent="Player"]
+texture = ExtResource("8_icon")
+scale = Vector2(0.32, 0.32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_player")
+
+[node name="AutoscrollCamera" type="Camera2D" parent="."]
+position = Vector2(256, 0)
+enabled = true
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+script = ExtResource("9_camera")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("6_eavuh")
+
+[node name="Panel" type="ColorRect" parent="HUD"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 904.0
+offset_bottom = 162.0
+mouse_filter = 2
+color = Color(0.02, 0.03, 0.05, 0.78)
+
+[node name="Info" type="Label" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 866.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Scena chunkow PNG - pokoje generowane proceduralnie"

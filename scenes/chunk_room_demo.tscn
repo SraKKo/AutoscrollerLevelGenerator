@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bdbqru3iibgfg"]
 
 [ext_resource type="Script" uid="uid://cp5mmeorb3o0j" path="res://scripts/chunk_room_demo.gd" id="1_qsk7l"]
-[ext_resource type="Script" path="res://scripts/camera_control.gd" id="2_camera"]
-[ext_resource type="Script" path="res://scripts/route_signs.gd" id="3_signs"]
-[ext_resource type="Script" path="res://scripts/chunk_demo_hud.gd" id="4_hud"]
-[ext_resource type="Script" path="res://scripts/chunk_rooms_renderer.gd" id="5_rooms"]
-[ext_resource type="Script" path="res://scripts/chunk_graph_debug.gd" id="6_debug"]
+[ext_resource type="Script" uid="uid://eu831oaly4l2" path="res://scripts/camera_control.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://c5dv7jivh62ap" path="res://scripts/route_signs.gd" id="3_signs"]
+[ext_resource type="Script" uid="uid://vdngxuk1fnry" path="res://scripts/chunk_demo_hud.gd" id="4_hud"]
+[ext_resource type="Script" uid="uid://c0lvc2gdapcxc" path="res://scripts/chunk_rooms_renderer.gd" id="5_rooms"]
+[ext_resource type="Script" uid="uid://d3w7vdiwvo2ie" path="res://scripts/chunk_graph_debug.gd" id="6_debug"]
 
 [node name="ChunkRoomDemo" type="Node2D"]
 script = ExtResource("1_qsk7l")
@@ -20,7 +20,6 @@ script = ExtResource("6_debug")
 script = ExtResource("3_signs")
 
 [node name="CameraControl" type="Camera2D" parent="."]
-enabled = true
 script = ExtResource("2_camera")
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -35,6 +34,7 @@ mouse_filter = 2
 color = Color(0.02, 0.03, 0.05, 0.78)
 
 [node name="Info" type="Label" parent="HUD/Panel"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 10.0
 offset_right = 866.0
