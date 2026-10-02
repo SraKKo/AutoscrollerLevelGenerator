@@ -1,9 +1,9 @@
 extends Node2D
 
-const TILE_SIZE := Vector2(1088.0, 816.0)
+const TILE_SIZE := Vector2(2176.0, 1632.0)
 const SCREEN_ORIGIN := Vector2.ZERO
-const LEVEL_UPPER := 136
-const LEVEL_MIDDLE := 408
+const LEVEL_UPPER := 272
+const LEVEL_MIDDLE := 816
 
 @export var random_seed := 54321
 @export_range(7, 30, 1) var room_count := 12

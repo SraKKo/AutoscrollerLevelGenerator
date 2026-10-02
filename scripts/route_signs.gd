@@ -4,9 +4,9 @@ extends Node2D
 const GOOD_ROUTE_TEXTURE := preload("res://Assets/Misc/y.png")
 const BAD_ROUTE_TEXTURE := preload("res://Assets/Misc/n.png")
 const MAYBE_ROUTE_TEXTURE := preload("res://Assets/Misc/maybe.png")
-const LEVEL_MIDDLE := 408
+const LEVEL_MIDDLE := 816
 const SIGN_SCALE := Vector2(0.38, 0.38)
-const SIGN_X_OFFSET := 380.0
+const SIGN_X_OFFSET := 760.0
 
 func update_signs(level: Dictionary, render_chunks: Array) -> void:
 	_clear_signs()

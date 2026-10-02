@@ -1,9 +1,9 @@
 class_name SharedLevelTopologyGenerator
 extends RefCounted
 
-const LEVEL_UPPER := 136
-const LEVEL_MIDDLE := 408
-const LEVEL_LOWER := 680
+const LEVEL_UPPER := 272
+const LEVEL_MIDDLE := 816
+const LEVEL_LOWER := 1360
 const GRAPH_LEVEL_UPPER := 180.0
 const GRAPH_LEVEL_MIDDLE := 420.0
 const GRAPH_LEVEL_LOWER := 660.0

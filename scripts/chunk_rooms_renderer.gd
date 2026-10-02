@@ -53,7 +53,8 @@ const CHUNK_TEXTURES := {
 	"ZigZagDown": preload("res://Assets/Chunks/Seamless/ZigZagDown.png"),
 }
 
-const CHUNK_PIXEL_SIZE := Vector2(1088.0, 816.0)
+const CHUNK_PIXEL_SIZE := Vector2(2176.0, 1632.0)
+const REFERENCE_SCALE := Vector2(2.0, 2.0)
 
 @export var room_scale := Vector2.ONE
 
@@ -68,7 +69,7 @@ func rebuild(render_chunks: Array) -> Array[Vector2]:
 		sprite.name = "Chunk_%s" % chunk_name
 		sprite.texture = CHUNK_TEXTURES[chunk_name] as Texture2D
 		sprite.position = room["world_position"] as Vector2
-		sprite.scale = room_scale
+		sprite.scale = room_scale * REFERENCE_SCALE
 		add_child(sprite)
 		room_positions.append(sprite.position)
 

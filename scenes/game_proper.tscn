@@ -15,8 +15,6 @@ script = ExtResource("1_game")
 random_seed = 243
 
 [node name="CaveBackground" parent="." instance=ExtResource("11_background")]
-layer = -10
-scroll_ignore_camera_zoom = true
 
 [node name="Rooms" type="Node2D" parent="."]
 script = ExtResource("10_chunk_scenes")
@@ -32,13 +30,16 @@ enabled = false
 script = ExtResource("5_r2b87")
 
 [node name="Player" parent="." instance=ExtResource("7_player")]
-position = Vector2(-350, 0)
+position = Vector2(-700, 0)
+jump_velocity = 390.0
 
-[node name="AutoscrollCamera" type="Camera2D" parent="."]
-position = Vector2(256, 0)
+[node name="AutoscrollCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(512, 0)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 script = ExtResource("9_camera")
+target_path = NodePath("../Player")
+player = NodePath("../Player")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 visible = false
