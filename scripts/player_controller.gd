@@ -7,6 +7,7 @@ const ATTACK_ANIMATIONS: Array[StringName] = [&"attack_1", &"attack_2", &"attack
 @export_range(100.0, 3000.0, 50.0) var ground_acceleration := 1800.0
 @export_range(100.0, 3000.0, 50.0) var air_acceleration := 900.0
 @export_range(100.0, 1500.0, 10.0) var jump_velocity := 620.0
+@export_range(0.0, 0.5, 0.01) var coyote_time := 0.12
 @export_range(100.0, 1500.0, 10.0) var air_sweep_velocity := 360.0
 @export_range(100.0, 1500.0, 10.0) var slide_speed := 620.0
 @export_range(100.0, 3000.0, 50.0) var slide_deceleration := 700.0
@@ -23,10 +24,13 @@ var is_sliding := false
 var attack_combo_step := 0
 var attack_queued := false
 var combo_reset_timer := 0.0
+var coyote_timer := 0.0
 var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravity", 980.0))
 
 @onready var scrolling_camera: Camera2D = get_node(camera_path) as Camera2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_hitbox: Area2D = $AttackHitbox
+@onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
 
 
 func _ready() -> void:
@@ -41,6 +45,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	_update_combo_timer(delta)
+	if is_on_floor() and velocity.y >= 0.0:
+		coyote_timer = coyote_time
+	else:
+		coyote_timer = maxf(coyote_timer - delta, 0.0)
 
 	var direction: float = Input.get_axis("ui_left", "ui_right")
 	var wasd_direction: float = (
@@ -60,10 +68,45 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if is_on_floor():
 		air_sweep_available = true
+
+	var can_air_sweep := not action_locked or animated_sprite.animation == &"air_sweep"
+	if Input.is_action_just_pressed("airslash") and air_sweep_available and can_air_sweep:
+		air_sweep_available = false
+		coyote_timer = 0.0
+		velocity.y = -air_sweep_velocity
+		action_locked = false
+		animated_sprite.stop()
+		_play_action(&"air_sweep")
+
 	_keep_inside_camera()
 	_update_facing()
 	_update_animation()
 	_handle_action_input()
+	_update_attack_hitbox()
+
+
+func _update_attack_hitbox() -> void:
+	var animation := animated_sprite.animation
+	var is_air_sweep := animation == &"air_sweep"
+	if is_dead or not action_locked or not (_is_attack_animation(animation) or is_air_sweep):
+		return
+	# The wind-up and recovery frames do not deal damage.
+	if animated_sprite.frame < 1 or animated_sprite.frame > 3:
+		return
+	var facing := -1.0 if animated_sprite.flip_h else 1.0
+	attack_hitbox.position = Vector2(30.0 * facing, -24.0 if is_air_sweep else -8.0)
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = attack_shape.shape
+	query.transform = attack_shape.global_transform
+	query.collision_mask = attack_hitbox.collision_mask
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	for hit in get_world_2d().direct_space_state.intersect_shape(query):
+		var target := hit["collider"] as Area2D
+		if target != null and target.has_method("receive_hit"):
+			var killed: bool = target.receive_hit()
+			if killed and is_air_sweep:
+				air_sweep_available = true
 
 
 func reset_to_spawn() -> void:
@@ -76,6 +119,7 @@ func reset_to_spawn() -> void:
 	attack_combo_step = 0
 	attack_queued = false
 	combo_reset_timer = 0.0
+	coyote_timer = 0.0
 	animated_sprite.play(&"idle")
 
 
@@ -84,7 +128,10 @@ func play_hurt() -> void:
 
 
 func play_death() -> void:
+	if is_dead:
+		return
 	is_dead = true
+	coyote_timer = 0.0
 	action_locked = true
 	velocity = Vector2.ZERO
 	_play_if_available(&"death", &"idle")
@@ -140,13 +187,11 @@ func _start_slide() -> void:
 func _handle_jump_input() -> void:
 	if not Input.is_action_just_pressed("ui_accept") or action_locked:
 		return
-	if is_on_floor():
+	if is_on_floor() or coyote_timer > 0.0:
+		coyote_timer = 0.0
 		velocity.y = -jump_velocity
 		animated_sprite.play(&"jump")
-	elif air_sweep_available:
-		air_sweep_available = false
-		velocity.y = -air_sweep_velocity
-		_play_action(&"air_sweep")
+
 
 
 func _play_action(animation_name: StringName) -> void:

@@ -1,0 +1,152 @@
+[gd_scene load_steps=22 format=3 uid="uid://cv0dswkc1fdrg"]
+
+[ext_resource type="Texture2D" uid="uid://c1aliq7pmh7yl" path="res://Assets/Traps/Arrow Trap/PNGs/Arrow Trap - Level 1.png" id="active"]
+[ext_resource type="Script" uid="uid://ulyids2y7f83" path="res://scripts/trap.gd" id="script"]
+
+[sub_resource type="AtlasTexture" id="active_0"]
+atlas = ExtResource("active")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_1"]
+atlas = ExtResource("active")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_2"]
+atlas = ExtResource("active")
+region = Rect2(192, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_3"]
+atlas = ExtResource("active")
+region = Rect2(288, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_4"]
+atlas = ExtResource("active")
+region = Rect2(384, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_5"]
+atlas = ExtResource("active")
+region = Rect2(480, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_6"]
+atlas = ExtResource("active")
+region = Rect2(576, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_7"]
+atlas = ExtResource("active")
+region = Rect2(672, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_8"]
+atlas = ExtResource("active")
+region = Rect2(768, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_9"]
+atlas = ExtResource("active")
+region = Rect2(864, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_10"]
+atlas = ExtResource("active")
+region = Rect2(960, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_11"]
+atlas = ExtResource("active")
+region = Rect2(1056, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_12"]
+atlas = ExtResource("active")
+region = Rect2(1152, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_13"]
+atlas = ExtResource("active")
+region = Rect2(1248, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_14"]
+atlas = ExtResource("active")
+region = Rect2(1344, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_15"]
+atlas = ExtResource("active")
+region = Rect2(1440, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="active_16"]
+atlas = ExtResource("active")
+region = Rect2(1536, 0, 96, 32)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("active_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_10")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_11")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_12")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_13")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_14")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_15")
+}, {
+"duration": 1.0,
+"texture": SubResource("active_16")
+}],
+"loop": true,
+"name": &"active",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(24, 16)
+
+[node name="ArrowTrap" type="Area2D"]
+z_index = 15
+scale = Vector2(2, 2)
+collision_layer = 0
+monitorable = false
+script = ExtResource("script")
+kind = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("frames")
+animation = &"active"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(48, 22)
+shape = SubResource("shape")

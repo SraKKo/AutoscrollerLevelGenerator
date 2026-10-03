@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3]
+[gd_scene load_steps=103 format=3]
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_g2els"]
 [ext_resource type="Texture2D" path="res://Assets/Player/AIR SWEEP.png" id="2_f1ej7"]
@@ -682,6 +682,9 @@ animations = [{
 radius = 11.5
 height = 42.0
 
+[sub_resource type="RectangleShape2D" id="AttackShape"]
+size = Vector2(66, 64)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 20
 collision_mask = 3
@@ -700,3 +703,13 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4.5, 0)
 shape = SubResource("CapsuleShape2D_fjrip")
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+position = Vector2(30, -8)
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("AttackShape")

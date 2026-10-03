@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://hlpq8uawi8xs"]
+
+[ext_resource type="Script" uid="uid://c3fn2bd4rr6xq" path="res://scripts/trap_arrow.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bnrrfw4xmi54x" path="res://Assets/Traps/Arrow Trap/PNGs/Arrow.png" id="2"]
+
+[node name="Arrow" type="Node2D"]
+z_index = 21
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2")

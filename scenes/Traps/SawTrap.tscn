@@ -1,0 +1,137 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/trap.gd" id="script"]
+[ext_resource type="Texture2D" path="res://Assets/Traps/Saw Trap/PNGs/Saw Trap - Level 1.png" id="active"]
+[ext_resource type="Texture2D" path="res://Assets/Traps/Saw Trap/Transitions/PNGs/Saw Trap - Level 1 - Transition.png" id="activate"]
+
+[sub_resource type="AtlasTexture" id="active_0"]
+atlas = ExtResource("active")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_1"]
+atlas = ExtResource("active")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_2"]
+atlas = ExtResource("active")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_3"]
+atlas = ExtResource("active")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_4"]
+atlas = ExtResource("active")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_5"]
+atlas = ExtResource("active")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_6"]
+atlas = ExtResource("active")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_7"]
+atlas = ExtResource("active")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_8"]
+atlas = ExtResource("active")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_9"]
+atlas = ExtResource("active")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_10"]
+atlas = ExtResource("active")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_11"]
+atlas = ExtResource("active")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_12"]
+atlas = ExtResource("active")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_13"]
+atlas = ExtResource("active")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_14"]
+atlas = ExtResource("active")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="active_15"]
+atlas = ExtResource("active")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_0"]
+atlas = ExtResource("activate")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_1"]
+atlas = ExtResource("activate")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_2"]
+atlas = ExtResource("activate")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_3"]
+atlas = ExtResource("activate")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_4"]
+atlas = ExtResource("activate")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_5"]
+atlas = ExtResource("activate")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_6"]
+atlas = ExtResource("activate")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_7"]
+atlas = ExtResource("activate")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_8"]
+atlas = ExtResource("activate")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_9"]
+atlas = ExtResource("activate")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="activate_10"]
+atlas = ExtResource("activate")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("active_0")}, {"duration": 1.0, "texture": SubResource("active_1")}, {"duration": 1.0, "texture": SubResource("active_2")}, {"duration": 1.0, "texture": SubResource("active_3")}, {"duration": 1.0, "texture": SubResource("active_4")}, {"duration": 1.0, "texture": SubResource("active_5")}, {"duration": 1.0, "texture": SubResource("active_6")}, {"duration": 1.0, "texture": SubResource("active_7")}, {"duration": 1.0, "texture": SubResource("active_8")}, {"duration": 1.0, "texture": SubResource("active_9")}, {"duration": 1.0, "texture": SubResource("active_10")}, {"duration": 1.0, "texture": SubResource("active_11")}, {"duration": 1.0, "texture": SubResource("active_12")}, {"duration": 1.0, "texture": SubResource("active_13")}, {"duration": 1.0, "texture": SubResource("active_14")}, {"duration": 1.0, "texture": SubResource("active_15")}], "loop": true, "name": &"active", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": SubResource("activate_0")}, {"duration": 1.0, "texture": SubResource("activate_1")}, {"duration": 1.0, "texture": SubResource("activate_2")}, {"duration": 1.0, "texture": SubResource("activate_3")}, {"duration": 1.0, "texture": SubResource("activate_4")}, {"duration": 1.0, "texture": SubResource("activate_5")}, {"duration": 1.0, "texture": SubResource("activate_6")}, {"duration": 1.0, "texture": SubResource("activate_7")}, {"duration": 1.0, "texture": SubResource("activate_8")}, {"duration": 1.0, "texture": SubResource("activate_9")}, {"duration": 1.0, "texture": SubResource("activate_10")}], "loop": false, "name": &"activate", "speed": 10.0}]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 12.0
+
+[node name="SawTrap" type="Area2D"]
+scale = Vector2(2, 2)
+z_index = 15
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+script = ExtResource("script")
+kind = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("frames")
+animation = &"active"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 16)
+shape = SubResource("shape")
