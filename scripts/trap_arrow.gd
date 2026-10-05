@@ -1,11 +1,14 @@
-extends Node2D
+extends Area2D
 
 var direction := Vector2.LEFT
 var speed := 420.0
 var lifetime := 5.0
+var is_destroyed := false
 
 
 func _physics_process(delta: float) -> void:
+	if is_destroyed:
+		return
 	lifetime -= delta
 	if lifetime <= 0.0:
 		queue_free()
@@ -22,3 +25,13 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 		return
 	global_position = next_position
+
+
+func receive_hit() -> bool:
+	if is_destroyed:
+		return false
+	is_destroyed = true
+	collision_layer = 0
+	set_physics_process(false)
+	queue_free()
+	return true

@@ -27,7 +27,7 @@ var combo_reset_timer := 0.0
 var coyote_timer := 0.0
 var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravity", 980.0))
 
-@onready var scrolling_camera: Camera2D = get_node(camera_path) as Camera2D
+@onready var scrolling_camera: Camera2D = get_node_or_null(camera_path) as Camera2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
