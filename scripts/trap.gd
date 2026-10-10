@@ -32,7 +32,10 @@ func _physics_process(_delta: float) -> void:
 	for hit in get_world_2d().direct_space_state.intersect_shape(query):
 		var body: Object = hit["collider"]
 		if body is PlayerController and not body.is_dead:
-			body.play_death()
+			if kind == Kind.SAW:
+				body.play_death()
+			else:
+				body.take_damage(1, global_position)
 
 
 func _on_frame_changed() -> void:

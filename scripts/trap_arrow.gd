@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	if not hit.is_empty():
 		var body: Object = hit["collider"]
 		if body is PlayerController and not body.is_dead:
-			body.play_death()
+			body.take_damage(1, global_position)
 		queue_free()
 		return
 	global_position = next_position

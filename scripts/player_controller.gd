@@ -3,6 +3,13 @@ extends CharacterBody2D
 
 const ATTACK_ANIMATIONS: Array[StringName] = [&"attack_1", &"attack_2", &"attack_3"]
 
+signal health_changed(current_health: int, maximum_health: int)
+
+@export_range(1, 10, 1) var max_health := 3
+@export_range(0.1, 3.0, 0.05) var invulnerability_duration := 1.0
+@export var knockback_speed := 140.0
+@export var knockback_lift := 100.0
+
 @export_range(50.0, 1000.0, 10.0) var move_speed := 360.0
 @export_range(100.0, 3000.0, 50.0) var ground_acceleration := 1800.0
 @export_range(100.0, 3000.0, 50.0) var air_acceleration := 900.0
@@ -17,12 +24,14 @@ const ATTACK_ANIMATIONS: Array[StringName] = [&"attack_1", &"attack_2", &"attack
 @export var camera_path: NodePath
 
 var spawn_position := Vector2.ZERO
+var health := 3
 var action_locked := false
 var is_dead := false
 var air_sweep_available := true
 var is_sliding := false
 var attack_combo_step := 0
 var attack_queued := false
+var attack_targets: Dictionary = {}
 var combo_reset_timer := 0.0
 var coyote_timer := 0.0
 var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravity", 980.0))
@@ -31,9 +40,16 @@ var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravi
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
+@onready var invulnerability_timer: Timer = $InvulnerabilityTimer
+@onready var knockback_timer: Timer = $KnockbackTimer
+@onready var hurt_material: ShaderMaterial = animated_sprite.material as ShaderMaterial
 
 
 func _ready() -> void:
+	health = max_health
+	invulnerability_timer.timeout.connect(_end_invulnerability)
+	add_to_group(&"player")
+	animated_sprite.animation_changed.connect(func() -> void: attack_targets.clear())
 	spawn_position = global_position
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	animated_sprite.play(&"idle")
@@ -43,6 +59,11 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		_apply_gravity(delta)
 		move_and_slide()
+		return
+	if not knockback_timer.is_stopped():
+		_apply_gravity(delta)
+		move_and_slide()
+		_keep_inside_camera()
 		return
 	_update_combo_timer(delta)
 	if is_on_floor() and velocity.y >= 0.0:
@@ -103,13 +124,19 @@ func _update_attack_hitbox() -> void:
 	query.collide_with_bodies = false
 	for hit in get_world_2d().direct_space_state.intersect_shape(query):
 		var target := hit["collider"] as Area2D
-		if target != null and target.has_method("receive_hit"):
+		if target != null and target.has_method("receive_hit") and not attack_targets.has(target.get_instance_id()):
+			attack_targets[target.get_instance_id()] = true
 			var killed: bool = target.receive_hit()
 			if killed and is_air_sweep:
 				air_sweep_available = true
 
 
 func reset_to_spawn() -> void:
+	health = max_health
+	invulnerability_timer.stop()
+	knockback_timer.stop()
+	_end_invulnerability()
+	health_changed.emit(health, max_health)
 	global_position = spawn_position
 	velocity = Vector2.ZERO
 	is_dead = false
@@ -127,10 +154,42 @@ func play_hurt() -> void:
 	_play_action(&"hurt")
 
 
+func take_damage(amount: int, source_position: Vector2) -> bool:
+	if is_dead or not invulnerability_timer.is_stopped() or amount <= 0:
+		return false
+	health = maxi(0, health - amount)
+	if health == 0:
+		play_death()
+		return true
+	health_changed.emit(health, max_health)
+	invulnerability_timer.start(invulnerability_duration)
+	hurt_material.set_shader_parameter("invulnerable", true)
+	knockback_timer.start()
+	var away := signf(global_position.x - source_position.x)
+	if is_zero_approx(away):
+		away = 1.0 if animated_sprite.flip_h else -1.0
+	velocity = Vector2(away * knockback_speed, -knockback_lift)
+	is_sliding = false
+	attack_queued = false
+	coyote_timer = 0.0
+	action_locked = false
+	_play_action(&"hurt")
+	return true
+
+
+func _end_invulnerability() -> void:
+	hurt_material.set_shader_parameter("invulnerable", false)
+
+
 func play_death() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	health = 0
+	invulnerability_timer.stop()
+	knockback_timer.stop()
+	_end_invulnerability()
+	health_changed.emit(health, max_health)
 	coyote_timer = 0.0
 	action_locked = true
 	velocity = Vector2.ZERO
@@ -159,6 +218,7 @@ func _play_next_attack() -> void:
 		return
 	action_locked = true
 	attack_combo_step = (attack_combo_step + 1) % ATTACK_ANIMATIONS.size()
+	attack_targets.clear()
 	combo_reset_timer = combo_reset_delay
 	animated_sprite.play(animation_name)
 
@@ -200,6 +260,7 @@ func _play_action(animation_name: StringName) -> void:
 	if not animated_sprite.sprite_frames.has_animation(animation_name):
 		return
 	action_locked = true
+	attack_targets.clear()
 	animated_sprite.play(animation_name)
 
 

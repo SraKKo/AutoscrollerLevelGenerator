@@ -1,6 +1,7 @@
-[gd_scene load_steps=103 format=3]
+[gd_scene load_steps=105 format=3]
 
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_g2els"]
+[ext_resource type="Shader" path="res://shaders/player_hurt.gdshader" id="hurt_shader"]
 [ext_resource type="Texture2D" path="res://Assets/Player/AIR SWEEP.png" id="2_f1ej7"]
 [ext_resource type="Texture2D" path="res://Assets/Player/ATTACK 3.png" id="2_fjrip"]
 [ext_resource type="Texture2D" path="res://Assets/Player/ATTACK 1.png" id="3_smehm"]
@@ -685,6 +686,13 @@ height = 42.0
 [sub_resource type="RectangleShape2D" id="AttackShape"]
 size = Vector2(66, 64)
 
+[sub_resource type="ShaderMaterial" id="HurtMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("hurt_shader")
+shader_parameter/invulnerable = false
+shader_parameter/blink_speed = 10.0
+shader_parameter/minimum_opacity = 0.2
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 20
 collision_mask = 3
@@ -693,6 +701,7 @@ script = ExtResource("1_g2els")
 camera_path = NodePath("../AutoscrollCamera")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("HurtMaterial")
 texture_filter = 1
 position = Vector2(0, -8)
 scale = Vector2(1.5, 1.5)
@@ -713,3 +722,13 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
 shape = SubResource("AttackShape")
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 1.0
+one_shot = true
+process_callback = 0
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+process_callback = 0

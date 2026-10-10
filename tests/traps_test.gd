@@ -37,12 +37,16 @@ func _run() -> void:
 			assert(not player.is_dead, "Raised ceiling must allow passage underneath")
 			trap.sprite.frame = 2
 		else:
-			player.position = Vector2(64, 32)
+			player.position = trap.hitbox.global_position
+		await create_timer(0.08).timeout
 		await physics_frame
 		await physics_frame
 		await physics_frame
-		assert(player.is_dead, "Active trap must kill on contact")
-		assert(player.animated_sprite.animation == &"death")
+		if scene_name == "SawTrap":
+			assert(player.is_dead and player.health == 0, "Saw must kill from full health")
+			assert(player.animated_sprite.animation == &"death")
+		else:
+			assert(not player.is_dead and player.health == 2, "Ceiling trap must deal one damage")
 		trap.queue_free()
 		await process_frame
 	player.reset_to_spawn()
@@ -53,7 +57,7 @@ func _run() -> void:
 	launcher.sprite.pause()
 	launcher.sprite.frame = 8
 	await create_timer(0.6).timeout
-	assert(player.is_dead, "Launched arrow must kill player")
+	assert(not player.is_dead and player.health == 2, "Launched arrow must deal one damage")
 	launcher.queue_free()
 	await process_frame
 	player.reset_to_spawn()
