@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvvfwep51cqwr" path="res://scenes/Interactables/Gem.tscn" id="6_hvnka"]
 [ext_resource type="PackedScene" uid="uid://o3hbdsrspmg7" path="res://scenes/Traps/SawTrap.tscn" id="6_wn24v"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/BigMushroom.tscn" id="7_ivtuy"]
-[ext_resource type="PackedScene" path="res://scenes/Enemies/GoblinMage.tscn" id="8_fa3ca"]
+[ext_resource type="PackedScene" uid="uid://duqhwd7k2xcca" path="res://scenes/Enemies/GoblinMage.tscn" id="8_fa3ca"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/GoblinMelee.tscn" id="9_wimhb"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/SmallMushroom.tscn" id="10_570so"]
 
