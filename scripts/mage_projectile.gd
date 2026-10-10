@@ -6,15 +6,16 @@ extends Area2D
 var is_destroyed := false
 var exploding := false
 
-@onready var warning: Polygon2D = $WarningCircle
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var fuse: Timer = $FuseTimer
 @onready var cleanup: Timer = $CleanupTimer
+@onready var explosion: AnimatedSprite2D = $Explosion
 
 
 func _ready() -> void:
 	fuse.timeout.connect(_explode)
-	cleanup.timeout.connect(queue_free)
+	cleanup.timeout.connect(func() -> void: exploding = false)
+	explosion.animation_finished.connect(queue_free)
 	fuse.start(fuse_time)
 	var pulse := create_tween().set_loops()
 	pulse.tween_property(sprite, "scale", Vector2(2.0, 2.0), 0.15)
@@ -33,11 +34,12 @@ func _explode() -> void:
 		return
 	exploding = true
 	sprite.hide()
-	warning.color = Color(1.0, 0.45, 0.1, 0.85)
+	explosion.show()
+	explosion.play(&"explode")
 	cleanup.start(explosion_time)
 
 
-func receive_hit() -> bool:
+func receive_hit(_source_position: Vector2 = Vector2.INF) -> bool:
 	if is_destroyed or exploding:
 		return false
 	is_destroyed = true

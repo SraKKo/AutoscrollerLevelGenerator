@@ -13,6 +13,8 @@ const PROJECTILE := preload("res://scenes/Enemies/MageProjectile.tscn")
 @export var patrol_distance := 80.0
 @export var windup_time := 0.45
 @export var recovery_time := 1.0
+@export var knockback_speed := 140.0
+@export var knockback_lift := 100.0
 
 var state: State = State.IDLE
 var facing := -1.0
@@ -23,9 +25,11 @@ var is_dead := false
 var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravity", 980.0))
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_effect: AnimatedSprite2D = $DeathEffect
 @onready var ledge: RayCast2D = $LedgeRay
 @onready var wall: RayCast2D = $WallRay
 @onready var timer: Timer = $StateTimer
+@onready var knockback_timer: Timer = $KnockbackTimer
 @onready var damage_area: Area2D = $DamageArea
 @onready var detection_area: Area2D = get_node_or_null("DetectionArea") as Area2D
 
@@ -34,6 +38,7 @@ func _ready() -> void:
 	spawn_position = global_position
 	timer.timeout.connect(_on_state_timeout)
 	sprite.animation_finished.connect(_on_animation_finished)
+	death_effect.animation_finished.connect(queue_free)
 	sprite.play(&"idle")
 	_update_facing()
 
@@ -50,7 +55,13 @@ func _physics_process(delta: float) -> void:
 			active = true
 	else:
 		active = true
-	if not active or is_dead:
+	if not active:
+		return
+	if is_dead or not knockback_timer.is_stopped():
+		velocity.y = minf(velocity.y + gravity * delta, 1000.0)
+		if knockback_timer.is_stopped():
+			velocity.x = 0.0
+		move_and_slide()
 		return
 	if not is_instance_valid(player):
 		for candidate in get_tree().get_nodes_in_group(&"player"):
@@ -115,17 +126,27 @@ func _update_facing() -> void:
 	damage_area.position.x = 0.0 if kind == Kind.SMALL_MUSHROOM else facing * 24.0
 
 
-func receive_hit() -> bool:
+func receive_hit(source_position: Vector2 = Vector2.INF) -> bool:
 	if is_dead:
 		return false
 	health -= 1
 	timer.stop()
-	velocity.x = 0.0
+	if source_position == Vector2.INF:
+		source_position = player.global_position if is_instance_valid(player) else global_position + Vector2(facing, 0)
+	var away := signf(global_position.x - source_position.x)
+	if is_zero_approx(away):
+		away = -facing
+	velocity = Vector2(away * knockback_speed, -knockback_lift)
+	active = true
+	knockback_timer.start()
 	if health <= 0:
 		is_dead = true
 		state = State.DEAD
 		$Hurtbox.set_deferred("collision_layer", 0)
-		sprite.play(&"death")
+		sprite.stop()
+		sprite.hide()
+		death_effect.show()
+		death_effect.play(&"death")
 		return true
 	state = State.HURT
 	sprite.play(&"hurt")

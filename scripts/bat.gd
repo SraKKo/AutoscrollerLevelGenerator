@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 # Returns true only for the hit that kills this enemy.
-func receive_hit() -> bool:
+func receive_hit(_source_position: Vector2 = Vector2.INF) -> bool:
 	if is_dead:
 		return false
 	is_dead = true

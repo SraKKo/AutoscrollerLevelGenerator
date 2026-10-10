@@ -21,6 +21,7 @@ func _generate_rooms(seed_value: int) -> void:
 
 
 func _render_rooms() -> void:
+	(rooms as GameChunkSceneRenderer).layout_seed = random_seed
 	rooms.rebuild(render_chunks)
 
 

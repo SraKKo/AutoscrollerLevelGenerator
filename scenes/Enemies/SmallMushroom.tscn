@@ -1,4 +1,6 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=32 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Enemies/DeathEffect.tscn" id="death_effect"]
 
 [ext_resource type="Script" path="res://scripts/ground_enemy.gd" id="1_6x1aj"]
 [ext_resource type="Texture2D" path="res://Assets/Enemies/5 Small_Mushroom/Small_Mushroom_attack.png" id="2_l4g0q"]
@@ -233,3 +235,11 @@ collision_mask = 2
 
 [node name="StateTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DeathEffect" parent="." instance=ExtResource("death_effect")]
+position = Vector2(0, -12)
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+process_callback = 0

@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	global_position = next_position
 
 
-func receive_hit() -> bool:
+func receive_hit(_source_position: Vector2 = Vector2.INF) -> bool:
 	if is_destroyed:
 		return false
 	is_destroyed = true

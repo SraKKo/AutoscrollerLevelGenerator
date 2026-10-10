@@ -1,4 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://duqhwd7k2xcca"]
+[gd_scene load_steps=35 format=3 uid="uid://duqhwd7k2xcca"]
+
+[ext_resource type="PackedScene" path="res://scenes/Enemies/DeathEffect.tscn" id="death_effect"]
 
 [ext_resource type="Script" uid="uid://cfueqngamsrd5" path="res://scripts/ground_enemy.gd" id="1_73x2g"]
 [ext_resource type="Texture2D" uid="uid://bh674fu7d4meh" path="res://Assets/Enemies/2 Goblin_Mage/Goblin_Mage_attack.png" id="2_gnb7q"]
@@ -250,6 +252,14 @@ collision_mask = 2
 
 [node name="StateTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DeathEffect" parent="." instance=ExtResource("death_effect")]
+position = Vector2(0, -12)
+
+[node name="KnockbackTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+process_callback = 0
 
 [node name="DetectionArea" type="Area2D" parent="."]
 position = Vector2(0, -12)

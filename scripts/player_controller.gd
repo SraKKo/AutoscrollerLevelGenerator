@@ -4,6 +4,7 @@ extends CharacterBody2D
 const ATTACK_ANIMATIONS: Array[StringName] = [&"attack_1", &"attack_2", &"attack_3"]
 
 signal health_changed(current_health: int, maximum_health: int)
+signal coins_changed(total_coins: int)
 
 @export_range(1, 10, 1) var max_health := 3
 @export_range(0.1, 3.0, 0.05) var invulnerability_duration := 1.0
@@ -14,6 +15,8 @@ signal health_changed(current_health: int, maximum_health: int)
 @export_range(100.0, 3000.0, 50.0) var ground_acceleration := 1800.0
 @export_range(100.0, 3000.0, 50.0) var air_acceleration := 900.0
 @export_range(100.0, 1500.0, 10.0) var jump_velocity := 620.0
+@export_range(100.0, 1000.0, 10.0) var wall_jump_push_speed := 360.0
+@export_range(0.0, 0.5, 0.01) var wall_jump_control_delay := 0.15
 @export_range(0.0, 0.5, 0.01) var coyote_time := 0.12
 @export_range(100.0, 1500.0, 10.0) var air_sweep_velocity := 360.0
 @export_range(100.0, 1500.0, 10.0) var slide_speed := 620.0
@@ -25,6 +28,7 @@ signal health_changed(current_health: int, maximum_health: int)
 
 var spawn_position := Vector2.ZERO
 var health := 3
+var coins := 0
 var action_locked := false
 var is_dead := false
 var air_sweep_available := true
@@ -34,22 +38,41 @@ var attack_queued := false
 var attack_targets: Dictionary = {}
 var combo_reset_timer := 0.0
 var coyote_timer := 0.0
+var wall_jump_timer := 0.0
+var standing_body_shape: Shape2D
+var sliding_body_shape: Shape2D
+var standing_attack_shape: Shape2D
+var sliding_attack_shape: Shape2D
+var standing_body_position: Vector2
+var standing_attack_position: Vector2
 var gravity: float = float(ProjectSettings.get_setting("physics/2d/default_gravity", 980.0))
 
 @onready var scrolling_camera: Camera2D = get_node_or_null(camera_path) as Camera2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var attack_shape: CollisionShape2D = $AttackHitbox/CollisionShape2D
+@onready var body_shape: CollisionShape2D = $CollisionShape2D
 @onready var invulnerability_timer: Timer = $InvulnerabilityTimer
 @onready var knockback_timer: Timer = $KnockbackTimer
 @onready var hurt_material: ShaderMaterial = animated_sprite.material as ShaderMaterial
 
 
 func _ready() -> void:
+	standing_body_shape = body_shape.shape
+	standing_attack_shape = attack_shape.shape
+	standing_body_position = body_shape.position
+	standing_attack_position = attack_shape.position
+	var capsule := standing_body_shape.duplicate() as CapsuleShape2D
+	capsule.radius *= 0.5
+	capsule.height *= 0.5
+	sliding_body_shape = capsule
+	var rectangle := standing_attack_shape.duplicate() as RectangleShape2D
+	rectangle.size *= 0.5
+	sliding_attack_shape = rectangle
 	health = max_health
 	invulnerability_timer.timeout.connect(_end_invulnerability)
 	add_to_group(&"player")
-	animated_sprite.animation_changed.connect(func() -> void: attack_targets.clear())
+	animated_sprite.animation_changed.connect(_on_animation_changed)
 	spawn_position = global_position
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	animated_sprite.play(&"idle")
@@ -66,6 +89,7 @@ func _physics_process(delta: float) -> void:
 		_keep_inside_camera()
 		return
 	_update_combo_timer(delta)
+	wall_jump_timer = maxf(wall_jump_timer - delta, 0.0)
 	if is_on_floor() and velocity.y >= 0.0:
 		coyote_timer = coyote_time
 	else:
@@ -79,7 +103,9 @@ func _physics_process(delta: float) -> void:
 		direction = wasd_direction
 
 	var acceleration: float = ground_acceleration if is_on_floor() else air_acceleration
-	if is_sliding:
+	if wall_jump_timer > 0.0 and not is_on_floor():
+		pass # Preserve the push briefly even when holding toward the wall.
+	elif is_sliding:
 		velocity.x = move_toward(velocity.x, 0.0, slide_deceleration * delta)
 	else:
 		velocity.x = move_toward(velocity.x, direction * move_speed, acceleration * delta)
@@ -126,12 +152,14 @@ func _update_attack_hitbox() -> void:
 		var target := hit["collider"] as Area2D
 		if target != null and target.has_method("receive_hit") and not attack_targets.has(target.get_instance_id()):
 			attack_targets[target.get_instance_id()] = true
-			var killed: bool = target.receive_hit()
+			var killed: bool = target.receive_hit(global_position)
 			if killed and is_air_sweep:
 				air_sweep_available = true
 
 
 func reset_to_spawn() -> void:
+	coins = 0
+	coins_changed.emit(coins)
 	health = max_health
 	invulnerability_timer.stop()
 	knockback_timer.stop()
@@ -142,12 +170,20 @@ func reset_to_spawn() -> void:
 	is_dead = false
 	action_locked = false
 	air_sweep_available = true
-	is_sliding = false
+	_set_slide_collision(false)
 	attack_combo_step = 0
 	attack_queued = false
 	combo_reset_timer = 0.0
 	coyote_timer = 0.0
+	wall_jump_timer = 0.0
 	animated_sprite.play(&"idle")
+
+
+func add_coins(amount: int) -> void:
+	if amount <= 0 or is_dead:
+		return
+	coins += amount
+	coins_changed.emit(coins)
 
 
 func play_hurt() -> void:
@@ -169,7 +205,8 @@ func take_damage(amount: int, source_position: Vector2) -> bool:
 	if is_zero_approx(away):
 		away = 1.0 if animated_sprite.flip_h else -1.0
 	velocity = Vector2(away * knockback_speed, -knockback_lift)
-	is_sliding = false
+	wall_jump_timer = 0.0
+	_set_slide_collision(false)
 	attack_queued = false
 	coyote_timer = 0.0
 	action_locked = false
@@ -185,6 +222,7 @@ func play_death() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	_set_slide_collision(false)
 	health = 0
 	invulnerability_timer.stop()
 	knockback_timer.stop()
@@ -192,6 +230,7 @@ func play_death() -> void:
 	health_changed.emit(health, max_health)
 	coyote_timer = 0.0
 	action_locked = true
+	wall_jump_timer = 0.0
 	velocity = Vector2.ZERO
 	_play_if_available(&"death", &"idle")
 
@@ -236,21 +275,60 @@ func _is_attack_animation(animation_name: StringName) -> bool:
 
 
 func _start_slide() -> void:
+	if action_locked or is_dead or not animated_sprite.sprite_frames.has_animation(&"slide"):
+		return
 	var slide_direction := -1.0 if animated_sprite.flip_h else 1.0
 	if not is_zero_approx(velocity.x):
 		slide_direction = signf(velocity.x)
-	is_sliding = true
+	_set_slide_collision(true)
 	velocity.x = slide_direction * slide_speed
 	_play_action(&"slide")
 
 
+func _set_slide_collision(sliding: bool) -> void:
+	is_sliding = sliding
+	var body_position := standing_body_position
+	var hit_position := standing_attack_position
+	if sliding:
+		body_position.y += standing_body_shape.get_rect().size.y * 0.25
+		hit_position.y += standing_attack_shape.get_rect().size.y * 0.25
+	body_shape.set_deferred("shape", sliding_body_shape if sliding else standing_body_shape)
+	body_shape.set_deferred("position", body_position)
+	attack_shape.set_deferred("shape", sliding_attack_shape if sliding else standing_attack_shape)
+	attack_shape.set_deferred("position", hit_position)
+
+
+func _on_animation_changed() -> void:
+	attack_targets.clear()
+	if is_sliding and animated_sprite.animation != &"slide":
+		_set_slide_collision(false)
+
+
 func _handle_jump_input() -> void:
-	if not Input.is_action_just_pressed("ui_accept") or action_locked:
-		return
+	if Input.is_action_just_pressed("ui_accept"):
+		_try_jump()
+
+
+func _try_jump() -> bool:
+	if action_locked or is_dead or not knockback_timer.is_stopped():
+		return false
+	if not is_on_floor() and is_on_wall():
+		var wall_normal := get_wall_normal()
+		if absf(wall_normal.x) < 0.5:
+			return false
+		velocity = Vector2(signf(wall_normal.x) * wall_jump_push_speed, -jump_velocity)
+		wall_jump_timer = wall_jump_control_delay
+		coyote_timer = 0.0
+		animated_sprite.flip_h = velocity.x < 0.0
+		animated_sprite.play(&"jump")
+		return true
 	if is_on_floor() or coyote_timer > 0.0:
 		coyote_timer = 0.0
+		wall_jump_timer = 0.0
 		velocity.y = -jump_velocity
 		animated_sprite.play(&"jump")
+		return true
+	return false
 
 
 
@@ -300,7 +378,7 @@ func _on_animation_finished() -> void:
 		_play_next_attack()
 		return
 	if animated_sprite.animation == &"slide":
-		is_sliding = false
+		_set_slide_collision(false)
 	action_locked = false
 	_update_animation()
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/Misc/wooden_platform_96x32.png" id="1"]
+
+[sub_resource type="RectangleShape2D" id="PlatformShape"]
+size = Vector2(96, 4)
+
+[node name="WoodenPlatform" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-48, -9)
+texture_filter = 1
+texture = ExtResource("1")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("PlatformShape")
+one_way_collision = true
+one_way_collision_margin = 4.0

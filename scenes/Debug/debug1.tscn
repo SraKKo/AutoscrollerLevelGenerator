@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://comak16h6qju8"]
+[gd_scene load_steps=15 format=4 uid="uid://comak16h6qju8"]
 
 [ext_resource type="PackedScene" uid="uid://bpyav22g6vj2v" path="res://scenes/tile_map_layer.tscn" id="1_o1o4s"]
 [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2_osfm2"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://duqhwd7k2xcca" path="res://scenes/Enemies/GoblinMage.tscn" id="8_fa3ca"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/GoblinMelee.tscn" id="9_wimhb"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/SmallMushroom.tscn" id="10_570so"]
+[ext_resource type="PackedScene" path="res://scenes/UI/GameUI.tscn" id="11_fa3ca"]
+[ext_resource type="PackedScene" path="res://scenes/Interactables/Coin.tscn" id="12_wimhb"]
+[ext_resource type="PackedScene" path="res://scenes/Traps/LargeSaw.tscn" id="13_1g28m"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/WoodenPlatform.tscn" id="14_e8xbh"]
 
 [node name="Debug1" type="Node2D"]
 
@@ -25,7 +29,6 @@ maximum_fall_speed = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-28, -237)
-zoom = Vector2(2.03, 2.03)
 
 [node name="Bat" parent="." instance=ExtResource("3_osfm2")]
 position = Vector2(823, -91)
@@ -55,3 +58,23 @@ position = Vector2(1824, -224)
 
 [node name="SmallMushroom" parent="." instance=ExtResource("10_570so")]
 position = Vector2(1184, 0)
+
+[node name="GameUI" parent="." instance=ExtResource("11_fa3ca")]
+
+[node name="Coin" parent="." instance=ExtResource("12_wimhb")]
+position = Vector2(480, -32)
+
+[node name="LargeSaw" parent="." instance=ExtResource("13_1g28m")]
+position = Vector2(1024, 0)
+
+[node name="LargeSaw2" parent="." instance=ExtResource("13_1g28m")]
+position = Vector2(1056, 0)
+
+[node name="LargeSaw3" parent="." instance=ExtResource("13_1g28m")]
+position = Vector2(1088, 0)
+
+[node name="LargeSaw4" parent="." instance=ExtResource("13_1g28m")]
+position = Vector2(1120, 0)
+
+[node name="WoodenPlatform" parent="." instance=ExtResource("14_e8xbh")]
+position = Vector2(823, -169)

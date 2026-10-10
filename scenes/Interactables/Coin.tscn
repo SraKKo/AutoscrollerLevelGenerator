@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/collectible.gd" id="1"]
+[ext_resource type="Texture2D" path="res://Assets/Interactable/coin_gold.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="coin_0"]
+atlas = ExtResource("2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_1"]
+atlas = ExtResource("2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_2"]
+atlas = ExtResource("2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_3"]
+atlas = ExtResource("2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_4"]
+atlas = ExtResource("2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_5"]
+atlas = ExtResource("2")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_6"]
+atlas = ExtResource("2")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="coin_7"]
+atlas = ExtResource("2")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{"frames": [{"duration": 1.0, "texture": SubResource("coin_0")}, {"duration": 1.0, "texture": SubResource("coin_1")}, {"duration": 1.0, "texture": SubResource("coin_2")}, {"duration": 1.0, "texture": SubResource("coin_3")}, {"duration": 1.0, "texture": SubResource("coin_4")}, {"duration": 1.0, "texture": SubResource("coin_5")}, {"duration": 1.0, "texture": SubResource("coin_6")}, {"duration": 1.0, "texture": SubResource("coin_7")}], "loop": true, "name": &"spin", "speed": 10.0}]
+
+[sub_resource type="CircleShape2D" id="shape"]
+radius = 10.0
+
+[node name="Coin" type="Area2D"]
+z_index = 21
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1")
+coin_value = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 16)
+texture_filter = 1
+sprite_frames = SubResource("frames")
+animation = &"spin"
+autoplay = "spin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("shape")
+

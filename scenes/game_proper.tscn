@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7dg7oyukw61a"]
+[gd_scene load_steps=11 format=3 uid="uid://b7dg7oyukw61a"]
 
 [ext_resource type="Script" uid="uid://ck14qxwedny7x" path="res://scripts/game_proper.gd" id="1_game"]
 [ext_resource type="Script" uid="uid://d3w7vdiwvo2ie" path="res://scripts/chunk_graph_debug.gd" id="3_tf84m"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ycj1okum8rb1" path="res://scripts/autoscroll_camera.gd" id="9_camera"]
 [ext_resource type="Script" uid="uid://cs2ipvivygiww" path="res://scripts/game_chunk_scene_renderer.gd" id="10_chunk_scenes"]
 [ext_resource type="PackedScene" uid="uid://cpc12wvrkeu0n" path="res://scenes/cave_background.tscn" id="11_background"]
+[ext_resource type="PackedScene" path="res://scenes/UI/GameUI.tscn" id="12_ui"]
 
 [node name="GameProper" type="Node2D"]
 script = ExtResource("1_game")
@@ -40,6 +41,9 @@ position_smoothing_speed = 8.0
 script = ExtResource("9_camera")
 target_path = NodePath("../Player")
 player = NodePath("../Player")
+
+[node name="GameUI" parent="." instance=ExtResource("12_ui")]
+player_path = NodePath("../Player")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 visible = false

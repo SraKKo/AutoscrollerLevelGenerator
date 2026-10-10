@@ -27,7 +27,7 @@ func reset_to(start_position: Vector2) -> void:
 
 
 func _handle_player_boundaries() -> void:
-	var screen_width = get_viewport_rect().size.x
+	var screen_width = get_viewport_rect().size.x / zoom.x
 
 	var left_boundary = global_position.x - (screen_width / 2.0)
 	

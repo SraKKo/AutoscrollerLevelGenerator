@@ -11,66 +11,72 @@
 z_index = -100
 
 [node name="Base" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.02, 1)
+scroll_scale = Vector2(0.02, 0)
 repeat_size = Vector2(1600, 0)
 repeat_times = 3
 
 [node name="Sprite" type="Sprite2D" parent="Base"]
+position = Vector2(0, 450)
 modulate = Color(0.66, 0.7, 0.82, 1)
 texture_filter = 1
 scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("6_base")
 
 [node name="Silhouette" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.1, 1)
+scroll_scale = Vector2(0.1, 0)
 repeat_size = Vector2(1600, 0)
 repeat_times = 3
 
 [node name="Sprite" type="Sprite2D" parent="Silhouette"]
+position = Vector2(0, 450)
 modulate = Color(0.72, 0.75, 0.86, 1)
 texture_filter = 1
 scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("5_silhouette")
 
 [node name="Cave" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.18, 1)
+scroll_scale = Vector2(0.18, 0)
 repeat_size = Vector2(1600, 0)
 repeat_times = 3
 
 [node name="Sprite" type="Sprite2D" parent="Cave"]
+position = Vector2(0, 450)
 modulate = Color(0.74, 0.77, 0.88, 1)
 texture_filter = 1
 scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("4_cave")
 
 [node name="Rocks" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.28, 1)
+scroll_scale = Vector2(0.28, 0)
 repeat_size = Vector2(1600, 0)
 repeat_times = 3
 
 [node name="Sprite" type="Sprite2D" parent="Rocks"]
+position = Vector2(0, 450)
 modulate = Color(0.76, 0.79, 0.9, 1)
 texture_filter = 1
 scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("3_rocks")
 
 [node name="Mushrooms" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.4, 1)
+scroll_scale = Vector2(0.4, 0)
 repeat_size = Vector2(1600, 0)
 repeat_times = 3
 
 [node name="Sprite" type="Sprite2D" parent="Mushrooms"]
+position = Vector2(0, 450)
 modulate = Color(0.82, 0.82, 0.92, 1)
 texture_filter = 1
 scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("2_mushrooms")
 
 [node name="Foreground" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.58, 1)
+scroll_scale = Vector2(0.58, 0)
 repeat_size = Vector2(1600, 0)
 repeat_times = 3
 
 [node name="Sprite" type="Sprite2D" parent="Foreground"]
+position = Vector2(0, 450)
 modulate = Color(0.82, 0.84, 0.94, 1)
 texture_filter = 1
 scale = Vector2(2.777778, 2.777778)
