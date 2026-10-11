@@ -26,5 +26,7 @@ func _render_rooms() -> void:
 
 
 func _reset_gameplay_view() -> void:
+	autoscroll_camera.chunk_top = SCREEN_ORIGIN.y - TILE_SIZE.y * 0.5
+	autoscroll_camera.chunk_bottom = SCREEN_ORIGIN.y + TILE_SIZE.y * 0.5
 	autoscroll_camera.reset_to(START_CAMERA_POSITION)
 	player.reset_to_spawn()
