@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 AppSettings="*res://scripts/app_settings.gd"
 FPSCounter="*res://scenes/UI/FPSCounter.tscn"
+SFX="*res://scripts/sound_effects.gd"
 
 [display]
 

@@ -50,6 +50,10 @@ func _restart() -> void:
 		return
 	transitioning = true
 	set_paused(false)
+	if get_parent().has_method("restart_run"):
+		get_parent().restart_run(false)
+		transitioning = false
+		return
 	if get_tree().reload_current_scene() != OK:
 		transitioning = false
 		set_paused(true)

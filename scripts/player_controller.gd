@@ -40,6 +40,7 @@ var air_sweep_available := true
 var jump_cut_available := false
 var is_sliding := false
 var pending_stand_up := false
+var slide_sound: Node
 var attack_combo_step := 0
 var attack_queued := false
 var attack_targets: Dictionary = {}
@@ -94,7 +95,7 @@ func _physics_process(delta: float) -> void:
 		_set_slide_collision(false)
 	if not knockback_timer.is_stopped():
 		_apply_gravity(delta)
-		move_and_slide()
+		_move_with_landing_sound()
 		_keep_inside_camera()
 		return
 	_update_combo_timer(delta)
@@ -121,7 +122,7 @@ func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_handle_jump_input()
 
-	move_and_slide()
+	_move_with_landing_sound()
 	if is_on_floor():
 		air_sweep_available = true
 	if is_on_floor() or velocity.y >= 0.0:
@@ -142,6 +143,14 @@ func _physics_process(delta: float) -> void:
 	_update_animation()
 	_handle_action_input()
 	_update_attack_hitbox()
+
+
+func _move_with_landing_sound() -> void:
+	var was_on_floor := is_on_floor()
+	var fall_speed := velocity.y
+	move_and_slide()
+	if not was_on_floor and is_on_floor() and fall_speed > 120.0:
+		SFX.play_effect(&"land")
 
 
 func _update_attack_hitbox() -> void:
@@ -165,16 +174,21 @@ func _update_attack_hitbox() -> void:
 		if target != null and target.has_method("receive_hit") and not attack_targets.has(target.get_instance_id()):
 			attack_targets[target.get_instance_id()] = true
 			var killed: bool = target.receive_hit(global_position)
+			if target.is_in_group(&"deflectable_projectiles"):
+				SFX.play_effect(&"block")
+			else:
+				SFX.play_sword_hit()
 			if killed and is_air_sweep:
 				air_sweep_available = true
 
 
-func reset_to_spawn() -> void:
-	coins = 0
-	pickup_score = 0
+func reset_to_spawn(reset_progress: bool = true) -> void:
+	if reset_progress:
+		coins = 0
+		pickup_score = 0
+		health = max_health
 	coins_changed.emit(coins)
 	pickup_score_changed.emit(pickup_score)
-	health = max_health
 	invulnerability_timer.stop()
 	knockback_timer.stop()
 	_end_invulnerability()
@@ -204,6 +218,7 @@ func add_coins(amount: int, score_value: int = -1) -> void:
 
 
 func play_hurt() -> void:
+	SFX.play_effect(&"hurt")
 	_play_action(&"hurt")
 
 
@@ -214,6 +229,7 @@ func take_damage(amount: int, source_position: Vector2) -> bool:
 	if health == 0:
 		play_death()
 		return true
+	SFX.play_effect(&"hurt")
 	health_changed.emit(health, max_health)
 	invulnerability_timer.start(invulnerability_duration)
 	hurt_material.set_shader_parameter("invulnerable", true)
@@ -240,6 +256,7 @@ func play_death() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	SFX.play_effect(&"hurt")
 	jump_cut_available = false
 	_set_slide_collision(false)
 	health = 0
@@ -302,10 +319,15 @@ func _start_slide() -> void:
 		slide_direction = signf(velocity.x)
 	_set_slide_collision(true)
 	velocity.x = slide_direction * slide_speed
+	slide_sound = SFX.play_effect(&"slide")
 	_play_action(&"slide")
 
 
 func _set_slide_collision(sliding: bool) -> void:
+	if not sliding:
+		if is_instance_valid(slide_sound):
+			SFX.stop_effect(slide_sound)
+		slide_sound = null
 	if not sliding and not is_dead and (is_sliding or pending_stand_up):
 		if not _resolve_slide_exit():
 			# Keep the small shape until a safe exit is reachable; never expand
@@ -389,6 +411,7 @@ func _try_jump() -> bool:
 		if absf(wall_normal.x) < 0.5:
 			return false
 		velocity = Vector2(signf(wall_normal.x) * wall_jump_push_speed, -jump_velocity)
+		SFX.play_effect(&"jump")
 		jump_cut_available = true
 		wall_jump_timer = wall_jump_control_delay
 		coyote_timer = 0.0
@@ -399,6 +422,7 @@ func _try_jump() -> bool:
 		coyote_timer = 0.0
 		wall_jump_timer = 0.0
 		velocity.y = -jump_velocity
+		SFX.play_effect(&"jump")
 		jump_cut_available = true
 		animated_sprite.play(&"jump")
 		return true

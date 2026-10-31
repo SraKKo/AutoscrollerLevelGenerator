@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4]
+[gd_scene load_steps=14 format=4]
 
 [ext_resource type="Texture2D" path="res://Assets/Chunks/Seamless/Finish.png" id="1_50jxn"]
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="2_f4omw"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/gem.gd" id="8_h0pkq"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Coin.tscn" id="9_khv8b"]
 [ext_resource type="Script" path="res://scripts/collectible.gd" id="10_6p1gg"]
+[ext_resource type="PackedScene" path="res://scenes/Interactables/StageGate.tscn" id="stage_gate"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4shg"]
 texture = ExtResource("3_v4v7o")
@@ -69,6 +70,9 @@ metadata/ground_collision_ready = true
 
 [node name="FinishBuilt01" type="Node2D"]
 metadata/chunk_type = "Finish"
+
+[node name="StageGate" parent="." instance=ExtResource("stage_gate")]
+position = Vector2(768, 128)
 
 [node name="Finish" type="Sprite2D" parent="."]
 visible = false

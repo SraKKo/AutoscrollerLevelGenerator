@@ -4,6 +4,7 @@ var transitioning := false
 
 
 func _ready() -> void:
+	SFX.stop_all()
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	%Play.pressed.connect(_play)
