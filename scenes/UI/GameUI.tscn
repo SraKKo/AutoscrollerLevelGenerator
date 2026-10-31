@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="1_ui"]
+[ext_resource type="Script" path="res://scripts/rolling_counter.gd" id="4_counter"]
 [ext_resource type="Texture2D" path="res://Assets/Interactable/coin_gold.png" id="2_coin"]
 [ext_resource type="Texture2D" path="res://Assets/Ui/assets.png" id="3_hearts"]
 
@@ -96,6 +97,26 @@ offset_top = 112.0
 offset_right = 232.0
 offset_bottom = 152.0
 mouse_filter = 2
+
+[node name="Score" type="Control" parent="Root"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 76.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("4_counter")
+
+[node name="Digits" type="HBoxContainer" parent="Root/Score"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 2
 
 [node name="CoinIcon" type="TextureRect" parent="Root/Coins"]
 layout_mode = 0

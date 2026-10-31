@@ -1,12 +1,13 @@
 class_name ChunkRouteSigns
 extends Node2D
 
-const GOOD_ROUTE_TEXTURE := preload("res://Assets/Misc/y.png")
-const BAD_ROUTE_TEXTURE := preload("res://Assets/Misc/n.png")
+const GOOD_ROUTE_TEXTURE := preload("res://Assets/Misc/yes.png")
+const BAD_ROUTE_TEXTURE := preload("res://Assets/Misc/no.png")
 const MAYBE_ROUTE_TEXTURE := preload("res://Assets/Misc/maybe.png")
-const LEVEL_MIDDLE := 816
-const SIGN_SCALE := Vector2(0.38, 0.38)
-const SIGN_X_OFFSET := 760.0
+const GRID_SIZE := Vector2(32.0, 32.0)
+const SIGN_X_OFFSET := 0.0
+# Floors at the entrances to the three separate paths in TripleSplit.
+const ROUTE_ENTRANCE_FLOORS := {272: -160.0, 816: 128.0, 1360: 384.0}
 
 func update_signs(level: Dictionary, render_chunks: Array) -> void:
 	_clear_signs()
@@ -51,13 +52,16 @@ func _can_reach_goal(graph: Dictionary, route_id: int, goal_id: int) -> bool:
 
 func _clear_signs() -> void:
 	for child in get_children():
+		remove_child(child)
 		child.queue_free()
 
 func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, sign_name: String) -> void:
 	var sign := Sprite2D.new()
 	sign.name = "%sRoute" % sign_name
 	sign.texture = texture
-	sign.position = split_position + Vector2(SIGN_X_OFFSET, float(route_level - LEVEL_MIDDLE))
-	sign.scale = SIGN_SCALE
+	sign.centered = false
+	sign.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var floor_y: float = ROUTE_ENTRANCE_FLOORS[route_level]
+	sign.position = (split_position + Vector2(SIGN_X_OFFSET, floor_y - texture.get_height())).snapped(GRID_SIZE)
 	sign.z_index = 10
 	add_child(sign)

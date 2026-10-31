@@ -29,6 +29,7 @@ func reset_to(start_position: Vector2) -> void:
 	global_position = start_position
 	_clamp_vertical_position()
 	reset_smoothing()
+	force_update_scroll()
 
 
 func _clamp_vertical_position() -> void:
@@ -44,14 +45,10 @@ func _clamp_vertical_position() -> void:
 
 
 func _handle_player_boundaries() -> void:
+	if player is PlayerController and player.is_dead:
+		return
 	var screen_width = get_viewport_rect().size.x / zoom.x
-
-	var left_boundary = global_position.x - (screen_width / 2.0)
-	
 	var margin := 16.0
-	
-	if player.global_position.x < left_boundary + margin:
-		player.global_position.x = left_boundary + margin
 
 	var right_boundary = global_position.x + (screen_width / 2.0)
 	if player.global_position.x > right_boundary - margin:

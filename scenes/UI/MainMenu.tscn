@@ -1,0 +1,171 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Theme" path="res://scenes/UI/MenuTheme.tres" id="1_b1p1q"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_s7yn2"]
+[ext_resource type="Texture2D" path="res://Assets/Tileset1/Background/Background.png" id="3_5r3px"]
+[ext_resource type="PackedScene" path="res://scenes/UI/SettingsPanel.tscn" id="4_kgeya"]
+[ext_resource type="Script" path="res://scripts/settings_panel.gd" id="5_qa57o"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1_b1p1q")
+script = ExtResource("2_s7yn2")
+
+[node name="DungeonBackground" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("3_5r3px")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.02, 0.035, 0.045, 0.64)
+
+[node name="MainPanelCenter" type="CenterContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MainPanel" type="PanelContainer" parent="MainPanelCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="MainPanelCenter/MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="MainPanelCenter/MainPanel/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="MainPanelCenter/MainPanel/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "AUTOSCROLLER"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MainPanelCenter/MainPanel/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Survive the dungeon. Keep moving."
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="MainPanelCenter/MainPanel/Padding/Content"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MainPanelCenter/MainPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="MainPanelCenter/MainPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Settings"
+
+[node name="DebugScenes" type="Button" parent="MainPanelCenter/MainPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Debug Scenes"
+
+[node name="Quit" type="Button" parent="MainPanelCenter/MainPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Quit Game"
+
+[node name="MenuStatus" type="Label" parent="MainPanelCenter/MainPanel/Padding/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
+
+[node name="Controls" type="Label" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 16
+text = "A/D — Move   ·   Space — Jump   ·   E — Attack   ·   Q — Air Slash   ·   Shift — Slide"
+horizontal_alignment = 1
+
+[node name="DebugPanel" type="PanelContainer" parent="MainPanelCenter"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="MainPanelCenter/DebugPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="MainPanelCenter/DebugPanel/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="MainPanelCenter/DebugPanel/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "DEBUG SCENES"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="MainPanelCenter/DebugPanel/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Choose a scene. Press Esc to return to the menu."
+horizontal_alignment = 1
+
+[node name="DebugGraph" type="Button" parent="MainPanelCenter/DebugPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Graph Generator"
+
+[node name="DebugChunks" type="Button" parent="MainPanelCenter/DebugPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Chunk Layout"
+
+[node name="DebugGameplay" type="Button" parent="MainPanelCenter/DebugPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Gameplay Sandbox"
+
+[node name="DebugBack" type="Button" parent="MainPanelCenter/DebugPanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Back"
+
+[node name="SettingsPanel" type="Control" parent="." instance=ExtResource("4_kgeya")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1_b1p1q")
+script = ExtResource("5_qa57o")
