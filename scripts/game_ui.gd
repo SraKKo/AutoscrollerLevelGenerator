@@ -37,6 +37,10 @@ func _update_coins(total_coins: int) -> void:
 	coin_value.text = str(total_coins)
 
 
+func update_score(value: int, instant: bool = false) -> void:
+	$Root/Score.set_value(value, instant)
+
+
 func _update_health(current_health: int, maximum_health: int) -> void:
 	if health_value != null:
 		health_value.text = "%d / %d" % [current_health, maximum_health]

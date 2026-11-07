@@ -15,6 +15,7 @@ func receive_hit(_source_position: Vector2 = Vector2.INF) -> bool:
 	if is_dead:
 		return false
 	is_dead = true
+	SFX.play_effect(&"enemy_death", self)
 	set_deferred("collision_layer", 0)
 	animated_sprite.play(&"death")
 	return true

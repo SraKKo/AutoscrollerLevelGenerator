@@ -141,6 +141,7 @@ func receive_hit(source_position: Vector2 = Vector2.INF) -> bool:
 	knockback_timer.start()
 	if health <= 0:
 		is_dead = true
+		SFX.play_effect(&"enemy_death", self)
 		state = State.DEAD
 		$Hurtbox.set_deferred("collision_layer", 0)
 		sprite.stop()
@@ -164,6 +165,7 @@ func _on_state_timeout() -> void:
 				shot.position = get_parent().to_local(player.global_position + Vector2(0, -12))
 				get_parent().add_child(shot)
 		else:
+			SFX.play_effect(&"enemy_attack", self)
 			_damage_overlaps()
 		state = State.RECOVERY
 		timer.start(recovery_time)

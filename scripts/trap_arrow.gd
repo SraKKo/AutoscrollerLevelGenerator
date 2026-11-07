@@ -6,6 +6,10 @@ var lifetime := 5.0
 var is_destroyed := false
 
 
+func _ready() -> void:
+	add_to_group(&"deflectable_projectiles")
+
+
 func _physics_process(delta: float) -> void:
 	if is_destroyed:
 		return

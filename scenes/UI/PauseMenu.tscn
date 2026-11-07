@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_avwb0"]
+[ext_resource type="Theme" path="res://scenes/UI/MenuTheme.tres" id="2_73e60"]
+[ext_resource type="PackedScene" path="res://scenes/UI/SettingsPanel.tscn" id="3_onjwa"]
+[ext_resource type="Script" path="res://scripts/settings_panel.gd" id="4_3m1qe"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_avwb0")
+
+[node name="Root" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_73e60")
+
+[node name="Shade" type="ColorRect" parent="Root"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.015, 0.025, 0.035, 0.82)
+
+[node name="PausePanelCenter" type="CenterContainer" parent="Root"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PausePanel" type="PanelContainer" parent="Root/PausePanelCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="Root/PausePanelCenter/PausePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="Root/PausePanelCenter/PausePanel/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Esc — Resume Game"
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Restart Run"
+
+[node name="PauseSettings" type="Button" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Settings"
+
+[node name="MainMenu" type="Button" parent="Root/PausePanelCenter/PausePanel/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="SettingsPanel" type="Control" parent="Root" instance=ExtResource("3_onjwa")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_73e60")
+script = ExtResource("4_3m1qe")

@@ -2,9 +2,12 @@ class_name PlayerController
 extends CharacterBody2D
 
 const ATTACK_ANIMATIONS: Array[StringName] = [&"attack_1", &"attack_2", &"attack_3"]
+const POINTS_PER_COIN := 5
 
 signal health_changed(current_health: int, maximum_health: int)
 signal coins_changed(total_coins: int)
+signal pickup_score_changed(total_score: int)
+signal died
 
 @export_range(1, 10, 1) var max_health := 3
 @export_range(0.1, 3.0, 0.05) var invulnerability_duration := 1.0
@@ -15,6 +18,7 @@ signal coins_changed(total_coins: int)
 @export_range(100.0, 3000.0, 50.0) var ground_acceleration := 1800.0
 @export_range(100.0, 3000.0, 50.0) var air_acceleration := 900.0
 @export_range(100.0, 1500.0, 10.0) var jump_velocity := 620.0
+@export_range(0.1, 1.0, 0.05) var jump_cut_multiplier := 0.45
 @export_range(100.0, 1000.0, 10.0) var wall_jump_push_speed := 360.0
 @export_range(0.0, 0.5, 0.01) var wall_jump_control_delay := 0.15
 @export_range(0.0, 0.5, 0.01) var coyote_time := 0.12
@@ -29,10 +33,14 @@ signal coins_changed(total_coins: int)
 var spawn_position := Vector2.ZERO
 var health := 3
 var coins := 0
+var pickup_score := 0
 var action_locked := false
 var is_dead := false
 var air_sweep_available := true
+var jump_cut_available := false
 var is_sliding := false
+var pending_stand_up := false
+var slide_sound: Node
 var attack_combo_step := 0
 var attack_queued := false
 var attack_targets: Dictionary = {}
@@ -83,9 +91,11 @@ func _physics_process(delta: float) -> void:
 		_apply_gravity(delta)
 		move_and_slide()
 		return
+	if pending_stand_up:
+		_set_slide_collision(false)
 	if not knockback_timer.is_stopped():
 		_apply_gravity(delta)
-		move_and_slide()
+		_move_with_landing_sound()
 		_keep_inside_camera()
 		return
 	_update_combo_timer(delta)
@@ -112,13 +122,16 @@ func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_handle_jump_input()
 
-	move_and_slide()
+	_move_with_landing_sound()
 	if is_on_floor():
 		air_sweep_available = true
+	if is_on_floor() or velocity.y >= 0.0:
+		jump_cut_available = false
 
 	var can_air_sweep := not action_locked or animated_sprite.animation == &"air_sweep"
 	if Input.is_action_just_pressed("airslash") and air_sweep_available and can_air_sweep:
 		air_sweep_available = false
+		jump_cut_available = false
 		coyote_timer = 0.0
 		velocity.y = -air_sweep_velocity
 		action_locked = false
@@ -130,6 +143,14 @@ func _physics_process(delta: float) -> void:
 	_update_animation()
 	_handle_action_input()
 	_update_attack_hitbox()
+
+
+func _move_with_landing_sound() -> void:
+	var was_on_floor := is_on_floor()
+	var fall_speed := velocity.y
+	move_and_slide()
+	if not was_on_floor and is_on_floor() and fall_speed > 120.0:
+		SFX.play_effect(&"land")
 
 
 func _update_attack_hitbox() -> void:
@@ -153,14 +174,21 @@ func _update_attack_hitbox() -> void:
 		if target != null and target.has_method("receive_hit") and not attack_targets.has(target.get_instance_id()):
 			attack_targets[target.get_instance_id()] = true
 			var killed: bool = target.receive_hit(global_position)
+			if target.is_in_group(&"deflectable_projectiles"):
+				SFX.play_effect(&"block")
+			else:
+				SFX.play_sword_hit()
 			if killed and is_air_sweep:
 				air_sweep_available = true
 
 
-func reset_to_spawn() -> void:
-	coins = 0
+func reset_to_spawn(reset_progress: bool = true) -> void:
+	if reset_progress:
+		coins = 0
+		pickup_score = 0
+		health = max_health
 	coins_changed.emit(coins)
-	health = max_health
+	pickup_score_changed.emit(pickup_score)
 	invulnerability_timer.stop()
 	knockback_timer.stop()
 	_end_invulnerability()
@@ -170,6 +198,7 @@ func reset_to_spawn() -> void:
 	is_dead = false
 	action_locked = false
 	air_sweep_available = true
+	jump_cut_available = false
 	_set_slide_collision(false)
 	attack_combo_step = 0
 	attack_queued = false
@@ -179,14 +208,17 @@ func reset_to_spawn() -> void:
 	animated_sprite.play(&"idle")
 
 
-func add_coins(amount: int) -> void:
+func add_coins(amount: int, score_value: int = -1) -> void:
 	if amount <= 0 or is_dead:
 		return
 	coins += amount
+	pickup_score += amount * POINTS_PER_COIN if score_value < 0 else score_value
 	coins_changed.emit(coins)
+	pickup_score_changed.emit(pickup_score)
 
 
 func play_hurt() -> void:
+	SFX.play_effect(&"hurt")
 	_play_action(&"hurt")
 
 
@@ -197,6 +229,7 @@ func take_damage(amount: int, source_position: Vector2) -> bool:
 	if health == 0:
 		play_death()
 		return true
+	SFX.play_effect(&"hurt")
 	health_changed.emit(health, max_health)
 	invulnerability_timer.start(invulnerability_duration)
 	hurt_material.set_shader_parameter("invulnerable", true)
@@ -205,6 +238,7 @@ func take_damage(amount: int, source_position: Vector2) -> bool:
 	if is_zero_approx(away):
 		away = 1.0 if animated_sprite.flip_h else -1.0
 	velocity = Vector2(away * knockback_speed, -knockback_lift)
+	jump_cut_available = false
 	wall_jump_timer = 0.0
 	_set_slide_collision(false)
 	attack_queued = false
@@ -222,6 +256,8 @@ func play_death() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	SFX.play_effect(&"hurt")
+	jump_cut_available = false
 	_set_slide_collision(false)
 	health = 0
 	invulnerability_timer.stop()
@@ -233,6 +269,7 @@ func play_death() -> void:
 	wall_jump_timer = 0.0
 	velocity = Vector2.ZERO
 	_play_if_available(&"death", &"idle")
+	died.emit()
 
 
 func _handle_action_input() -> void:
@@ -282,10 +319,23 @@ func _start_slide() -> void:
 		slide_direction = signf(velocity.x)
 	_set_slide_collision(true)
 	velocity.x = slide_direction * slide_speed
+	slide_sound = SFX.play_effect(&"slide")
 	_play_action(&"slide")
 
 
 func _set_slide_collision(sliding: bool) -> void:
+	if not sliding:
+		if is_instance_valid(slide_sound):
+			SFX.stop_effect(slide_sound)
+		slide_sound = null
+	if not sliding and not is_dead and (is_sliding or pending_stand_up):
+		if not _resolve_slide_exit():
+			# Keep the small shape until a safe exit is reachable; never expand
+			# the collider inside solid terrain or teleport through a wall.
+			is_sliding = false
+			pending_stand_up = true
+			return
+	pending_stand_up = false
 	is_sliding = sliding
 	var body_position := standing_body_position
 	var hit_position := standing_attack_position
@@ -298,6 +348,46 @@ func _set_slide_collision(sliding: bool) -> void:
 	attack_shape.set_deferred("position", hit_position)
 
 
+func _resolve_slide_exit() -> bool:
+	if _can_stand_at(global_position):
+		return true
+	var direction := signf(velocity.x)
+	if is_zero_approx(direction):
+		direction = -1.0 if animated_sprite.flip_h else 1.0
+	for distance in range(2, 513, 2):
+		for displacement in [Vector2(direction * distance, 0), Vector2(-direction * distance, 0), Vector2(0, -distance)]:
+			var candidate: Vector2 = global_position + displacement
+			if _can_stand_at(candidate) and not test_move(global_transform, displacement):
+				global_position = candidate
+				return true
+	return false
+
+
+func _can_stand_at(at: Vector2) -> bool:
+	var transform := global_transform
+	transform.origin = at
+	transform = transform * Transform2D(0.0, standing_body_position)
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = standing_body_shape
+	query.transform = transform
+	query.collision_mask = collision_mask
+	query.exclude = [get_rid()]
+	query.collide_with_areas = false
+	query.collide_with_bodies = true
+	var feet := transform * Vector2(0, standing_body_shape.get_rect().end.y)
+	for hit in get_world_2d().direct_space_state.intersect_shape(query, 64):
+		var collider: Object = hit["collider"]
+		if collider is CollisionObject2D:
+			var owner_id: int = collider.shape_find_owner(int(hit["shape"]))
+			var owner_node: Object = collider.shape_owner_get_owner(owner_id)
+			if owner_node is CollisionShape2D and owner_node.one_way_collision:
+				var surface: Rect2 = owner_node.global_transform * owner_node.shape.get_rect()
+				if feet.y > surface.position.y + 1.0:
+					continue
+		return false
+	return true
+
+
 func _on_animation_changed() -> void:
 	attack_targets.clear()
 	if is_sliding and animated_sprite.animation != &"slide":
@@ -307,6 +397,10 @@ func _on_animation_changed() -> void:
 func _handle_jump_input() -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		_try_jump()
+	if jump_cut_available and not Input.is_action_pressed("ui_accept"):
+		if velocity.y < 0.0:
+			velocity.y *= jump_cut_multiplier
+		jump_cut_available = false
 
 
 func _try_jump() -> bool:
@@ -317,6 +411,8 @@ func _try_jump() -> bool:
 		if absf(wall_normal.x) < 0.5:
 			return false
 		velocity = Vector2(signf(wall_normal.x) * wall_jump_push_speed, -jump_velocity)
+		SFX.play_effect(&"jump")
+		jump_cut_available = true
 		wall_jump_timer = wall_jump_control_delay
 		coyote_timer = 0.0
 		animated_sprite.flip_h = velocity.x < 0.0
@@ -326,6 +422,8 @@ func _try_jump() -> bool:
 		coyote_timer = 0.0
 		wall_jump_timer = 0.0
 		velocity.y = -jump_velocity
+		SFX.play_effect(&"jump")
+		jump_cut_available = true
 		animated_sprite.play(&"jump")
 		return true
 	return false
@@ -391,7 +489,7 @@ func _apply_gravity(delta: float) -> void:
 
 
 func _keep_inside_camera() -> void:
-	if not is_instance_valid(scrolling_camera):
+	if is_dead or not is_instance_valid(scrolling_camera):
 		return
 
 	var viewport_size: Vector2 = get_viewport_rect().size
@@ -402,4 +500,19 @@ func _keep_inside_camera() -> void:
 	var camera_center: Vector2 = scrolling_camera.get_screen_center_position()
 	var minimum: Vector2 = camera_center - visible_half_size + Vector2.ONE * screen_margin
 	var maximum: Vector2 = camera_center + visible_half_size - Vector2.ONE * screen_margin
-	global_position = global_position.clamp(minimum, maximum)
+	if global_position.x < minimum.x:
+		var previous_velocity := velocity
+		velocity = Vector2((minimum.x - global_position.x) / get_physics_process_delta_time(), 0)
+		move_and_slide()
+		velocity = previous_velocity
+		if global_position.x < minimum.x - 0.5:
+			for i in range(get_slide_collision_count()):
+				if get_slide_collision(i).get_normal().x < -0.8:
+					play_death()
+					return
+	var constrained := global_position.clamp(minimum, maximum)
+	# Left-edge correction above is collision-aware; do not force it again.
+	constrained.x = minf(global_position.x, maximum.x)
+	var correction := constrained - global_position
+	if not correction.is_zero_approx():
+		move_and_collide(correction)

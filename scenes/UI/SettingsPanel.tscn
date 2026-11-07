@@ -1,0 +1,223 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Theme" path="res://scenes/UI/MenuTheme.tres" id="1_gx5m0"]
+[ext_resource type="Script" path="res://scripts/settings_panel.gd" id="2_ltt3n"]
+
+[node name="SettingsPanel" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1_gx5m0")
+script = ExtResource("2_ltt3n")
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.01, 0.02, 0.03, 0.92)
+
+[node name="SettingsCardCenter" type="CenterContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SettingsCard" type="PanelContainer" parent="SettingsCardCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="SettingsCardCenter/SettingsCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+
+[node name="Subtitle" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Display & Audio"
+
+[node name="DisplayRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="DisplayRowLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/DisplayRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Display Mode"
+
+[node name="DisplayMode" type="OptionButton" parent="SettingsCardCenter/SettingsCard/Padding/Content/DisplayRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResolutionRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="ResolutionRowLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/ResolutionRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Resolution"
+
+[node name="Resolution" type="OptionButton" parent="SettingsCardCenter/SettingsCard/Padding/Content/ResolutionRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResolutionHint" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Window size"
+
+[node name="VSyncRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="VSyncRowLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/VSyncRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "V-Sync"
+
+[node name="VSync" type="CheckButton" parent="SettingsCardCenter/SettingsCard/Padding/Content/VSyncRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "On"
+
+[node name="FPSRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="FPSLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/FPSRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Show FPS"
+
+[node name="ShowFPS" type="CheckButton" parent="SettingsCardCenter/SettingsCard/Padding/Content/FPSRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Off"
+
+[node name="Divider" type="HSeparator" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="MasterVolumeRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="MasterVolumeRowLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/MasterVolumeRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Master Volume"
+
+[node name="MasterVolume" type="HSlider" parent="SettingsCardCenter/SettingsCard/Padding/Content/MasterVolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+[node name="MasterValue" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/MasterVolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100%"
+horizontal_alignment = 2
+
+[node name="MusicVolumeRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="MusicVolumeRowLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/MusicVolumeRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Music"
+
+[node name="MusicVolume" type="HSlider" parent="SettingsCardCenter/SettingsCard/Padding/Content/MusicVolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+[node name="MusicValue" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/MusicVolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100%"
+horizontal_alignment = 2
+
+[node name="EffectsVolumeRow" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="EffectsVolumeRowLabel" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/EffectsVolumeRow"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Effects"
+
+[node name="EffectsVolume" type="HSlider" parent="SettingsCardCenter/SettingsCard/Padding/Content/EffectsVolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+[node name="EffectsValue" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content/EffectsVolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "100%"
+horizontal_alignment = 2
+
+[node name="SettingsStatus" type="Label" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Select Apply to save your changes."
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="SettingsCardCenter/SettingsCard/Padding/Content"]
+layout_mode = 2
+
+[node name="Defaults" type="Button" parent="SettingsCardCenter/SettingsCard/Padding/Content/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Defaults"
+
+[node name="Spacer" type="Control" parent="SettingsCardCenter/SettingsCard/Padding/Content/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cancel" type="Button" parent="SettingsCardCenter/SettingsCard/Padding/Content/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Cancel"
+
+[node name="Apply" type="Button" parent="SettingsCardCenter/SettingsCard/Padding/Content/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Apply"

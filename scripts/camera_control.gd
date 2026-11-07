@@ -8,6 +8,8 @@ extends Camera2D
 @export var max_zoom := 3.0
 
 func _process(delta: float) -> void:
+	if get_viewport().gui_get_focus_owner() is LineEdit or get_viewport().gui_get_focus_owner() is TextEdit:
+		return
 	var direction := Vector2.ZERO
 	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
 		direction.x -= 1.0

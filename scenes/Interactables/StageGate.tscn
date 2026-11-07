@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/stage_gate.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="GateShape"]
+size = Vector2(64, 128)
+
+[node name="StageGate" type="Area2D"]
+z_index = 5
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -64)
+shape = SubResource("GateShape")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -64)
+
+[node name="Placeholder" type="Node2D" parent="Visuals"]
+
+[node name="Portal" type="Polygon2D" parent="Visuals/Placeholder"]
+color = Color(0.12, 0.72, 0.8, 0.65)
+polygon = PackedVector2Array(-32, 0, -32, -96, 32, -96, 32, 0)
+
+[node name="LeftPillar" type="Polygon2D" parent="Visuals/Placeholder"]
+color = Color(0.35, 0.4, 0.44, 1)
+polygon = PackedVector2Array(-64, 0, -64, -128, -32, -128, -32, 0)
+
+[node name="RightPillar" type="Polygon2D" parent="Visuals/Placeholder"]
+color = Color(0.35, 0.4, 0.44, 1)
+polygon = PackedVector2Array(32, 0, 32, -128, 64, -128, 64, 0)
+
+[node name="Lintel" type="Polygon2D" parent="Visuals/Placeholder"]
+color = Color(0.55, 0.59, 0.57, 1)
+polygon = PackedVector2Array(-64, -128, 64, -128, 64, -96, -64, -96)
+
+[node name="Label" type="Label" parent="Visuals/Placeholder"]
+offset_left = -96.0
+offset_top = -160.0
+offset_right = 96.0
+offset_bottom = -128.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.75, 0.95, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.06, 0.08, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "NEXT STAGE"
+horizontal_alignment = 1
