@@ -41,6 +41,10 @@ func _generate_rooms(seed_value: int) -> void:
 		max_consecutive_straights
 	)
 	var chunk_names: Array[String] = _build_chunk_sequence(level["modules"] as Array)
+	var sequence_error: String = ChunkPortContracts.first_sequence_error(chunk_names)
+	if not sequence_error.is_empty():
+		push_error("Generator utworzyl niezgodna sekwencje: %s" % sequence_error)
+		return
 	_apply_visual_split_indices()
 	_build_render_chunks(chunk_names)
 	_render_rooms()

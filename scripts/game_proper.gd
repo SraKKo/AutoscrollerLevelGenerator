@@ -14,6 +14,10 @@ var run_start_seed := 0
 var stage_transition := false
 var initial_scroll_speed := 220.0
 
+@export var randomize_seed_on_start := true
+
+var seed_rng := RandomNumberGenerator.new()
+
 @onready var player: PlayerController = $Player
 @onready var autoscroll_camera: AutoscrollCamera = $AutoscrollCamera
 @onready var game_ui: CanvasLayer = $GameUI
@@ -22,18 +26,26 @@ var initial_scroll_speed := 220.0
 
 
 func _ready() -> void:
-	initial_scroll_speed = autoscroll_camera.scroll_speed
-	player.died.connect(_on_player_died)
-	player.pickup_score_changed.connect(_on_pickup_score_changed)
-	player.animated_sprite.animation_finished.connect(_on_player_animation_finished)
-	death_screen.retry_requested.connect(restart_run.bind(false))
-	death_screen.new_run_requested.connect(restart_run.bind(true))
-	death_screen.menu_requested.connect(_return_to_menu)
+	seed_rng.randomize()
+	if randomize_seed_on_start:
+		random_seed = _next_random_seed()
 	graph_debug.visible = false
 	hud.visible = false
 	camera_control.enabled = false
 	super._ready()
 	_reset_gameplay_view()
+	print("GameProper seed: %d" % random_seed)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("generate_level"):
+		_generate_rooms(_next_random_seed())
+		print("GameProper seed: %d" % random_seed)
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("toggle_validation_method"):
+		use_dfs = not use_dfs
+		_revalidate()
+		get_viewport().set_input_as_handled()
 
 
 func _process(delta: float) -> void:
@@ -150,9 +162,9 @@ func _reset_gameplay_view() -> void:
 	autoscroll_camera.scroll_speed = minf(initial_scroll_speed + (stage_index - 1) * speed_increase_per_stage, maxf(initial_scroll_speed, maximum_scroll_speed))
 	autoscroll_camera.chunk_top = SCREEN_ORIGIN.y - TILE_SIZE.y * 0.5
 	autoscroll_camera.chunk_bottom = SCREEN_ORIGIN.y + TILE_SIZE.y * 0.5
-	player.reset_to_spawn(not stage_transition)
-	player.set_physics_process(true)
-	var visible_width := autoscroll_camera.get_viewport_rect().size.x / autoscroll_camera.zoom.x
-	var camera_start := player.global_position
-	camera_start.x += visible_width * START_CAMERA_LEAD_RATIO - autoscroll_camera.offset.x
-	autoscroll_camera.reset_to(camera_start)
+	autoscroll_camera.reset_to(START_CAMERA_POSITION)
+	player.reset_to_spawn()
+
+
+func _next_random_seed() -> int:
+	return int(seed_rng.randi())
