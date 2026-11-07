@@ -8,6 +8,7 @@ const GRAPH_LEVEL_UPPER := 180.0
 const GRAPH_LEVEL_MIDDLE := 420.0
 const GRAPH_LEVEL_LOWER := 660.0
 const GRAPH_COLUMN_STEP := 220.0
+const MIN_BRANCH_CHUNK_COST := 5
 
 var rng := RandomNumberGenerator.new()
 var next_node_id := 0
@@ -26,11 +27,20 @@ func generate(
 	var estimated_chunk_count := 1
 	var branch_count := 0
 	var consecutive_straights := 0
-	var branch_target: int = clampi(int(ceil(float(level_size) / 6.0)), 1, 8)
+	var branch_target: int = clampi(int(floor(float(level_size) / 8.0)), 1, 8)
 	var target_before_finish: int = maxi(level_size - 1, 6)
 
 	while estimated_chunk_count < target_before_finish:
-		var must_branch: bool = branch_count < branch_target or consecutive_straights >= max_consecutive_straights
+		var remaining_budget: int = target_before_finish - estimated_chunk_count
+		var missing_branches: int = maxi(branch_target - branch_count, 0)
+		var must_meet_branch_target: bool = (
+			missing_branches > 0
+			and remaining_budget <= missing_branches * MIN_BRANCH_CHUNK_COST
+		)
+		var must_branch: bool = (
+			must_meet_branch_target
+			or consecutive_straights >= max_consecutive_straights
+		)
 		if must_branch or rng.randf() < branch_chance:
 			var branch_module: Dictionary = _create_branch_module(modules.size())
 			modules.append(branch_module)

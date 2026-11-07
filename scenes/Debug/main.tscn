@@ -8,6 +8,7 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_main")
+random_seed = 1
 
 [node name="LevelGenerator" type="Node" parent="."]
 script = ExtResource("2_generator")

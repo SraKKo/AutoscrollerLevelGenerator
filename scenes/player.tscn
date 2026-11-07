@@ -696,7 +696,9 @@ shader_parameter/minimum_opacity = 0.2
 [node name="Player" type="CharacterBody2D"]
 z_index = 20
 collision_mask = 3
-floor_snap_length = 8.0
+floor_max_angle = 0.872665
+floor_snap_length = 16.0
+floor_constant_speed = true
 script = ExtResource("1_g2els")
 camera_path = NodePath("../AutoscrollCamera")
 
