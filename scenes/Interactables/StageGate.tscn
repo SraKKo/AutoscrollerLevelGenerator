@@ -1,14 +1,50 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://dhr083ndgd5wn"]
 
 [ext_resource type="Script" path="res://scripts/stage_gate.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cq1tj5thgwlad" path="res://Assets/Interactable/Portal_sprite.png" id="2_portal"]
 
 [sub_resource type="RectangleShape2D" id="GateShape"]
 size = Vector2(64, 128)
 
+[sub_resource type="AtlasTexture" id="PortalFrame0"]
+atlas = ExtResource("2_portal")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="PortalFrame1"]
+atlas = ExtResource("2_portal")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="PortalFrame2"]
+atlas = ExtResource("2_portal")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="PortalFrame3"]
+atlas = ExtResource("2_portal")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="PortalFrames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("PortalFrame0")
+}, {
+"duration": 1.0,
+"texture": SubResource("PortalFrame1")
+}, {
+"duration": 1.0,
+"texture": SubResource("PortalFrame2")
+}, {
+"duration": 1.0,
+"texture": SubResource("PortalFrame3")
+}],
+"loop": true,
+"name": &"active",
+"speed": 8.0
+}]
+
 [node name="StageGate" type="Area2D"]
 z_index = 5
 collision_layer = 0
-collision_mask = 1
 monitorable = false
 script = ExtResource("1")
 
@@ -18,12 +54,16 @@ shape = SubResource("GateShape")
 
 [node name="Visuals" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-visible = false
+[node name="PortalSprite" type="AnimatedSprite2D" parent="Visuals"]
 texture_filter = 1
-position = Vector2(0, -64)
+position = Vector2(-18, -24)
+sprite_frames = SubResource("PortalFrames")
+animation = &"active"
+autoplay = "active"
+frame_progress = 0.49238822
 
 [node name="Placeholder" type="Node2D" parent="Visuals"]
+visible = false
 
 [node name="Portal" type="Polygon2D" parent="Visuals/Placeholder"]
 color = Color(0.12, 0.72, 0.8, 0.65)
@@ -46,7 +86,6 @@ offset_left = -96.0
 offset_top = -160.0
 offset_right = 96.0
 offset_bottom = -128.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.75, 0.95, 0.9, 1)
 theme_override_colors/font_outline_color = Color(0.04, 0.06, 0.08, 1)
 theme_override_constants/outline_size = 4

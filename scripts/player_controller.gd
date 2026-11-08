@@ -137,6 +137,7 @@ func _physics_process(delta: float) -> void:
 		action_locked = false
 		animated_sprite.stop()
 		_play_action(&"air_sweep")
+		SFX.play_effect(&"airslash")
 
 	_keep_inside_camera()
 	_update_facing()
@@ -296,6 +297,7 @@ func _play_next_attack() -> void:
 	attack_combo_step = (attack_combo_step + 1) % ATTACK_ANIMATIONS.size()
 	attack_targets.clear()
 	combo_reset_timer = combo_reset_delay
+	SFX.play_effect(&"player_hit")
 	animated_sprite.play(animation_name)
 
 

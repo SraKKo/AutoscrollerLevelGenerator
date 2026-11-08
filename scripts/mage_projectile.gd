@@ -31,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 func _explode() -> void:
 	if exploding:
 		return
-	SFX.play_effect(&"fireball", self)
+	SFX.play_magic_explosion(self)
 	exploding = true
 	sprite.hide()
 	explosion.show()

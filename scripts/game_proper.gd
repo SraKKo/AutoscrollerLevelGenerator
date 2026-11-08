@@ -13,6 +13,7 @@ var stage_index := 1
 var run_start_seed := 0
 var stage_transition := false
 var initial_scroll_speed := 220.0
+var start_camera_position := Vector2.ZERO
 
 @export var randomize_seed_on_start := true
 
@@ -22,11 +23,13 @@ var seed_rng := RandomNumberGenerator.new()
 @onready var autoscroll_camera: AutoscrollCamera = $AutoscrollCamera
 @onready var game_ui: CanvasLayer = $GameUI
 @onready var pause_menu: CanvasLayer = $PauseMenu
-@onready var death_screen: CanvasLayer = $DeathScreen
+@onready var death_screen: DeathScreen = $DeathScreen
 
 
 func _ready() -> void:
 	seed_rng.randomize()
+	start_camera_position = autoscroll_camera.global_position
+	_connect_gameplay_signals()
 	if randomize_seed_on_start:
 		random_seed = _next_random_seed()
 	graph_debug.visible = false
@@ -37,7 +40,36 @@ func _ready() -> void:
 	print("GameProper seed: %d" % random_seed)
 
 
+func _connect_gameplay_signals() -> void:
+	if not player.died.is_connected(_on_player_died):
+		player.died.connect(_on_player_died)
+	if not player.pickup_score_changed.is_connected(_on_pickup_score_changed):
+		player.pickup_score_changed.connect(_on_pickup_score_changed)
+	if not player.animated_sprite.animation_finished.is_connected(
+		_on_player_animation_finished
+	):
+		player.animated_sprite.animation_finished.connect(
+			_on_player_animation_finished
+		)
+	if not death_screen.retry_requested.is_connected(_on_retry_requested):
+		death_screen.retry_requested.connect(_on_retry_requested)
+	if not death_screen.new_run_requested.is_connected(_on_new_run_requested):
+		death_screen.new_run_requested.connect(_on_new_run_requested)
+	if not death_screen.menu_requested.is_connected(_return_to_menu):
+		death_screen.menu_requested.connect(_return_to_menu)
+
+
+func _on_retry_requested() -> void:
+	restart_run(false)
+
+
+func _on_new_run_requested() -> void:
+	restart_run(true)
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if run_over or stage_transition:
+		return
 	if event.is_action_pressed("generate_level"):
 		_generate_rooms(_next_random_seed())
 		print("GameProper seed: %d" % random_seed)
@@ -65,11 +97,6 @@ func _refresh_score() -> void:
 	if next_score != score:
 		score = next_score
 		game_ui.update_score(score)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not run_over and not stage_transition:
-		super._unhandled_input(event)
 
 
 func _on_player_died() -> void:
@@ -146,6 +173,7 @@ func _advance_stage() -> void:
 	stage_index += 1
 	_generate_rooms(random_seed + 1)
 	stage_transition = false
+	player.set_physics_process(true)
 
 
 func _reset_gameplay_view() -> void:
@@ -162,8 +190,14 @@ func _reset_gameplay_view() -> void:
 	autoscroll_camera.scroll_speed = minf(initial_scroll_speed + (stage_index - 1) * speed_increase_per_stage, maxf(initial_scroll_speed, maximum_scroll_speed))
 	autoscroll_camera.chunk_top = SCREEN_ORIGIN.y - TILE_SIZE.y * 0.5
 	autoscroll_camera.chunk_bottom = SCREEN_ORIGIN.y + TILE_SIZE.y * 0.5
-	autoscroll_camera.reset_to(START_CAMERA_POSITION)
 	player.reset_to_spawn()
+	player.set_physics_process(true)
+	var viewport_width: float = get_viewport_rect().size.x / autoscroll_camera.zoom.x
+	var camera_start := Vector2(
+		player.global_position.x + viewport_width * START_CAMERA_LEAD_RATIO,
+		start_camera_position.y
+	)
+	autoscroll_camera.reset_to(camera_start)
 
 
 func _next_random_seed() -> int:

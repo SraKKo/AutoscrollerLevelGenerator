@@ -2,21 +2,12 @@ extends Area2D
 
 signal stage_entered(player: PlayerController)
 
-@export var gate_texture: Texture2D
-
 var activated := false
 
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	if gate_texture != null:
-		$Visuals/Sprite2D.texture = gate_texture
-		$Visuals/Sprite2D.show()
-		$Visuals/Placeholder.hide()
-	else:
-		var pulse := create_tween().set_loops()
-		pulse.tween_property($Visuals/Placeholder/Portal, "modulate:a", 0.45, 0.7)
-		pulse.tween_property($Visuals/Placeholder/Portal, "modulate:a", 1.0, 0.7)
+	$Visuals/PortalSprite.play(&"active")
 
 
 func _on_body_entered(body: Node2D) -> void:

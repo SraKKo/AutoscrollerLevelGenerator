@@ -1,3 +1,4 @@
+class_name DeathScreen
 extends CanvasLayer
 
 signal retry_requested

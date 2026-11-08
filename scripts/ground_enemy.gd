@@ -164,6 +164,7 @@ func _on_state_timeout() -> void:
 				var shot = PROJECTILE.instantiate()
 				shot.position = get_parent().to_local(player.global_position + Vector2(0, -12))
 				get_parent().add_child(shot)
+				SFX.play_effect(&"fireball", self)
 		else:
 			SFX.play_effect(&"enemy_attack", self)
 			_damage_overlaps()

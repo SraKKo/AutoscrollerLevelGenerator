@@ -6,6 +6,8 @@ const STREAMS := {
 	&"land": preload("res://Assets/Sounds/player/Stone Land.wav"),
 	&"slide": preload("res://Assets/Sounds/player/slide.wav"),
 	&"hurt": preload("res://Assets/Sounds/player/player_hurt.wav"),
+	&"player_hit": preload("res://Assets/Sounds/player/player_hit.wav"),
+	&"airslash": preload("res://Assets/Sounds/player/player_airslash.wav"),
 	&"hit_1": preload("res://Assets/Sounds/player/Sword Impact Hit 1.wav"),
 	&"hit_3": preload("res://Assets/Sounds/player/Sword Impact Hit 3.wav"),
 	&"block": preload("res://Assets/Sounds/player/Sword Blocked 1.wav"),
@@ -14,11 +16,15 @@ const STREAMS := {
 	&"enemy_attack": preload("res://Assets/Sounds/enemies/melee_attack.wav"),
 	&"enemy_death": preload("res://Assets/Sounds/enemies/death.wav"),
 	&"fireball": preload("res://Assets/Sounds/enemies/Fireball 2.wav"),
+	&"magic_explosion": preload("res://Assets/Sounds/enemies/goblin_magic_explosion.wav"),
+	&"magic_explosion_heavy": preload("res://Assets/Sounds/enemies/DSGNImpt_EXPLOSION-Forced Interruption_HY_PC-002.wav"),
 }
 const VOLUME_DB := {
 	&"jump": -8.0, &"land": -12.0, &"slide": -8.0, &"hurt": -4.0,
+	&"player_hit": -5.0, &"airslash": -7.0,
 	&"hit_1": -8.0, &"hit_3": -8.0, &"block": -6.0, &"gem": -6.0,
 	&"coin": -10.0, &"enemy_attack": -10.0, &"enemy_death": -8.0, &"fireball": -6.0,
+	&"magic_explosion": -7.0, &"magic_explosion_heavy": -9.0,
 }
 
 var voices: Array[Node] = []
@@ -63,6 +69,11 @@ func play_effect(sound: StringName, source: Node2D = null) -> Node:
 
 func play_sword_hit() -> void:
 	play_effect(&"hit_1" if randi_range(0, 1) == 0 else &"hit_3")
+
+
+func play_magic_explosion(source: Node2D) -> void:
+	var sound: StringName = &"magic_explosion" if randi_range(0, 2) > 0 else &"magic_explosion_heavy"
+	play_effect(sound, source)
 
 
 func stop_effect(voice: Node) -> void:

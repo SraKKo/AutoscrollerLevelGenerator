@@ -129,6 +129,20 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")
 
+[node name="PitSawFillLeft" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-816, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitSawFill1" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-656, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
 [node name="PitSaw2" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
 z_index = 15
 position = Vector2(-576, 224)
@@ -136,9 +150,23 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")
 
+[node name="PitSawFill2" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-496, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
 [node name="PitSaw3" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
 z_index = 15
 position = Vector2(-416, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitSawFillRight" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-336, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")

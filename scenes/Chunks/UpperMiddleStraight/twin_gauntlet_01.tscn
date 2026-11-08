@@ -101,6 +101,20 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
 
+[node name="PitSawFillLeft" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-816, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitSawFill1" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-656, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
 [node name="PitSaw2" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
 z_index = 15
 position = Vector2(-576, -352)
@@ -108,9 +122,23 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
 
+[node name="PitSawFill2" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-496, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
 [node name="PitSaw3" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
 z_index = 15
 position = Vector2(-416, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitSawFillRight" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-336, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -384,6 +412,13 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
 
+[node name="PitSawFill1" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-624, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
 [node name="PitSaw2" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
 z_index = 15
 position = Vector2(-512, 224)
@@ -391,9 +426,23 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
 
+[node name="PitSawFill2" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-400, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
 [node name="PitSaw3" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
 z_index = 15
 position = Vector2(-288, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitSawFill3" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-176, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")

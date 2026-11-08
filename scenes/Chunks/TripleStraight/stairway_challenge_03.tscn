@@ -213,6 +213,13 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("10_2w8q2")
 
+[node name="PitSawFill1" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-624, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
 [node name="PitSaw2" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
 z_index = 15
 position = Vector2(-512, -352)
@@ -220,9 +227,23 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("10_2w8q2")
 
+[node name="PitSawFill2" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-400, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
 [node name="PitSaw3" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
 z_index = 15
 position = Vector2(-288, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitSawFill3" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-176, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("10_2w8q2")
