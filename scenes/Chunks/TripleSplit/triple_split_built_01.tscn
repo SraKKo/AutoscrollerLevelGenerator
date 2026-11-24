@@ -137,19 +137,19 @@ collision_layer = 0
 script = ExtResource("6_st4ce")
 
 [node name="Platform195" type="StaticBody2D" parent="TransitionPlatforms" instance=ExtResource("4_dqug0")]
-position = Vector2(-32, -128)
+position = Vector2(-96, -128)
 collision_layer = 2
 collision_mask = 0
 
 [node name="Coin196" type="Area2D" parent="TransitionPlatforms" instance=ExtResource("5_4twn3")]
 z_index = 21
-position = Vector2(-32, -160)
+position = Vector2(-96, -160)
 collision_layer = 0
 script = ExtResource("6_st4ce")
 
 [node name="Coin197" type="Area2D" parent="TransitionPlatforms" instance=ExtResource("5_4twn3")]
 z_index = 21
-position = Vector2(0, -160)
+position = Vector2(-64, -160)
 collision_layer = 0
 script = ExtResource("6_st4ce")
 
