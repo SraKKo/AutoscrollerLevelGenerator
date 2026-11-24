@@ -9,6 +9,16 @@ const GRAPH_LEVEL_MIDDLE := 420.0
 const GRAPH_LEVEL_LOWER := 660.0
 const GRAPH_COLUMN_STEP := 220.0
 const MIN_BRANCH_CHUNK_COST := 5
+const TWO_ROOM_ROUTES := [
+	["RiseToUpper", "UpperToMiddle"],
+	["DropToLower", "LowerToMiddle"],
+]
+const THREE_ROOM_ROUTES := [
+	["RiseToUpper", "StraightUpper", "UpperToMiddle"],
+	["DropToLower", "StraightLower", "LowerToMiddle"],
+	["RiseToUpper", "GoingDown", "LowerToMiddle"],
+	["DropToLower", "GoingUp", "UpperToMiddle"],
+]
 
 var rng := RandomNumberGenerator.new()
 var next_node_id := 0
@@ -56,6 +66,7 @@ func generate(
 			else:
 				consecutive_straights = 0
 
+	_vary_corridor_elevations(modules)
 	var graph_data: Dictionary = _build_graph(modules)
 	return {
 		"seed": seed_value,
@@ -70,6 +81,25 @@ func generate(
 		"alternate_route_count": graph_data["alternate_route_count"],
 		"validation": {},
 	}
+
+func _vary_corridor_elevations(modules: Array[Dictionary]) -> void:
+	# Each route returns to the middle port before the next junction.
+	var index := 0
+	while index < modules.size():
+		if modules[index]["type"] != "corridor":
+			index += 1
+			continue
+		var run_end := index + 1
+		while run_end < modules.size() and modules[run_end]["type"] == "corridor":
+			run_end += 1
+		while run_end - index >= 2:
+			var routes := THREE_ROOM_ROUTES if run_end - index >= 3 else TWO_ROOM_ROUTES
+			var route: Array = routes[rng.randi_range(0, routes.size() - 1)]
+			if rng.randf() < 0.7:
+				for offset in range(route.size()):
+					modules[index + offset]["kind"] = route[offset]
+			index += route.size()
+		index = run_end
 
 func _create_branch_module(module_index: int) -> Dictionary:
 	var levels: Array[int] = [LEVEL_UPPER, LEVEL_MIDDLE, LEVEL_LOWER]
@@ -128,7 +158,13 @@ func _build_graph(modules: Array[Dictionary]) -> Dictionary:
 		var module: Dictionary = modules[module_index]
 		if module["type"] == "corridor":
 			current_x += GRAPH_COLUMN_STEP
-			var corridor_id: int = _create_graph_node(Vector2(current_x, GRAPH_LEVEL_MIDDLE), "normal")
+			var exit_mask := ChunkPortContracts.masks_for(str(module["kind"])).y
+			var exit_y := GRAPH_LEVEL_MIDDLE
+			if exit_mask == ChunkPortContracts.UPPER:
+				exit_y = GRAPH_LEVEL_UPPER
+			elif exit_mask == ChunkPortContracts.LOWER:
+				exit_y = GRAPH_LEVEL_LOWER
+			var corridor_id: int = _create_graph_node(Vector2(current_x, exit_y), "normal")
 			_add_graph_edge(current_id, corridor_id)
 			current_id = corridor_id
 		else:
