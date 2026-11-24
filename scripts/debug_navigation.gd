@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const RunSeed := preload("res://scripts/run_seed.gd")
+
 var transitioning := false
 var generate_level: Callable
 var last_seed := 0
@@ -35,7 +37,7 @@ func _process(_delta: float) -> void:
 
 func _generate_seed(_submitted_text: String = "") -> void:
 	var text := seed_input.text.strip_edges()
-	if not _valid_seed(text):
+	if not RunSeed.is_valid(text):
 		seed_status.text = "Enter a whole number within the signed 64-bit range."
 		seed_status.add_theme_color_override("font_color", Color("ef8b83"))
 		seed_input.grab_focus()
@@ -48,16 +50,6 @@ func _generate_seed(_submitted_text: String = "") -> void:
 	seed_input.release_focus()
 	seed_status.text = "Generated seed %d." % seed_value
 	seed_status.add_theme_color_override("font_color", Color("a5d69e"))
-
-
-func _valid_seed(text: String) -> bool:
-	if not text.is_valid_int():
-		return false
-	var digits := text.trim_prefix("-").trim_prefix("+")
-	while digits.length() > 1 and digits.begins_with("0"):
-		digits = digits.substr(1)
-	var limit := "9223372036854775808" if text.begins_with("-") else "9223372036854775807"
-	return digits.length() < limit.length() or (digits.length() == limit.length() and digits <= limit)
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -67,6 +67,22 @@ horizontal_alignment = 1
 [node name="Divider" type="HSeparator" parent="MainPanelCenter/MainPanel/Padding/Content"]
 layout_mode = 2
 
+[node name="SeedRow" type="HBoxContainer" parent="MainPanelCenter/MainPanel/Padding/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Caption" type="Label" parent="MainPanelCenter/MainPanel/Padding/Content/SeedRow"]
+layout_mode = 2
+text = "Run seed"
+
+[node name="SeedInput" type="LineEdit" parent="MainPanelCenter/MainPanel/Padding/Content/SeedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Leave blank for random"
+
 [node name="Play" type="Button" parent="MainPanelCenter/MainPanel/Padding/Content"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)

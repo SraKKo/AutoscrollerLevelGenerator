@@ -9,11 +9,6 @@ const SEAM_SAFE_COLUMNS := 8
 const EDGE_TOP_ROW := -26
 const EDGE_BOTTOM_ROW := 25
 const SLOPE_ATLAS_COORDS: Array[Vector2i] = [Vector2i(1, 4), Vector2i(2, 4)]
-const INVALID_SLOPE_OFFSETS: Array[Vector2i] = [
-	Vector2i(0, 1),
-	Vector2i(1, -1),
-	Vector2i(1, 1),
-]
 
 var layout_seed: int = 54321
 var scene_variants: Dictionary = {}
@@ -123,13 +118,15 @@ func _slope_pattern_error(ground: TileMapLayer) -> String:
 	for cell: Vector2i in ground.get_used_cells():
 		if not _is_slope_cell(ground, cell):
 			continue
-		for offset: Vector2i in INVALID_SLOPE_OFFSETS:
-			var neighbor := cell + offset
-			if not _same_slope_variant(ground, cell, neighbor):
-				continue
-			if offset.x == 0:
-				return "slope powtorzony pionowo przy %s" % cell
-			return "brak pelnego kafla miedzy slope'ami przy %s" % cell
+		if _same_slope_variant(ground, cell, cell + Vector2i.DOWN):
+			return "slope powtorzony pionowo przy %s" % cell
+		var ceiling := (ground.get_cell_alternative_tile(cell) & TileSetAtlasSource.TRANSFORM_FLIP_V) != 0
+		var backing := Vector2i.UP if ceiling else Vector2i.DOWN
+		# A diagonal pair can meet directly when solid rock fills the inside corner.
+		for side: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT]:
+			if _same_slope_variant(ground, cell, cell + side + backing):
+				if ground.get_cell_source_id(cell + backing) == -1:
+					return "brak wypelnienia przy skosie %s" % cell
 	return ""
 
 

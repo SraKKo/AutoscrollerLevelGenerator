@@ -218,6 +218,14 @@ func add_coins(amount: int, score_value: int = -1) -> void:
 	pickup_score_changed.emit(pickup_score)
 
 
+func heal(amount: int) -> bool:
+	if is_dead or amount <= 0 or health >= max_health:
+		return false
+	health = mini(health + amount, max_health)
+	health_changed.emit(health, max_health)
+	return true
+
+
 func play_hurt() -> void:
 	SFX.play_effect(&"hurt")
 	_play_action(&"hurt")

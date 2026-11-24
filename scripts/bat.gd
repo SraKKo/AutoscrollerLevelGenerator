@@ -1,5 +1,7 @@
 extends Area2D
 
+const HEART_DROP := preload("res://scripts/heart_drop.gd")
+
 var is_dead := false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -15,6 +17,7 @@ func receive_hit(_source_position: Vector2 = Vector2.INF) -> bool:
 	if is_dead:
 		return false
 	is_dead = true
+	HEART_DROP.try_spawn(self)
 	SFX.play_effect(&"enemy_death", self)
 	set_deferred("collision_layer", 0)
 	animated_sprite.play(&"death")

@@ -4,6 +4,7 @@ enum Kind { MELEE, MAGE, SMALL_MUSHROOM, BIG_MUSHROOM }
 enum State { IDLE, WINDUP, RECOVERY, HURT, DEAD }
 
 const PROJECTILE := preload("res://scenes/Enemies/MageProjectile.tscn")
+const HEART_DROP := preload("res://scripts/heart_drop.gd")
 
 @export var kind: Kind = Kind.MELEE
 @export var health := 2
@@ -141,6 +142,7 @@ func receive_hit(source_position: Vector2 = Vector2.INF) -> bool:
 	knockback_timer.start()
 	if health <= 0:
 		is_dead = true
+		HEART_DROP.try_spawn(self)
 		SFX.play_effect(&"enemy_death", self)
 		state = State.DEAD
 		$Hurtbox.set_deferred("collision_layer", 0)

@@ -1,5 +1,7 @@
 extends "res://scripts/chunk_room_demo.gd"
 
+const RunSeed := preload("res://scripts/run_seed.gd")
+
 const START_CAMERA_LEAD_RATIO := 0.25
 const POINTS_PER_SECOND := 2.0
 
@@ -30,7 +32,10 @@ func _ready() -> void:
 	seed_rng.randomize()
 	start_camera_position = autoscroll_camera.global_position
 	_connect_gameplay_signals()
-	if randomize_seed_on_start:
+	if RunSeed.pending != null:
+		random_seed = int(RunSeed.pending)
+		RunSeed.pending = null
+	elif randomize_seed_on_start:
 		random_seed = _next_random_seed()
 	graph_debug.visible = false
 	hud.visible = false
