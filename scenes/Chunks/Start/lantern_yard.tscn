@@ -54,7 +54,7 @@ position = Vector2(448, 0)
 [node name="Coin3" parent="OreLoftMiddle43" instance=ExtResource("Coin")]
 position = Vector2(672, 32)
 
-[node name="JumpHint" type="Label" parent="."]
+[node name="JumpHint" type="Label" parent="." groups=["tutorial_hint"]]
 position = Vector2(-608, 0)
 mouse_filter = 2
 z_index = 10

@@ -145,7 +145,15 @@ func _return_to_menu() -> void:
 
 
 func _generate_rooms(seed_value: int) -> void:
+	var show_intro := not stage_transition and not AppSettings.has_started_run
+	(rooms as GameChunkSceneRenderer).show_intro_hints = show_intro
+	route_signs.preview_limit = 1 if show_intro else 0
 	super._generate_rooms(seed_value)
+	if show_intro:
+		AppSettings.has_started_run = true
+		var error := AppSettings.save_settings()
+		if error != OK:
+			push_warning("Could not save tutorial progress: %s" % error_string(error))
 	if is_node_ready():
 		_reset_gameplay_view()
 

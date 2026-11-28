@@ -11,6 +11,7 @@ const EDGE_BOTTOM_ROW := 25
 const SLOPE_ATLAS_COORDS: Array[Vector2i] = [Vector2i(1, 4), Vector2i(2, 4)]
 
 var layout_seed: int = 54321
+var show_intro_hints := false
 var scene_variants: Dictionary = {}
 var catalog_ready := false
 
@@ -219,6 +220,7 @@ func rebuild(render_chunks: Array) -> Array[Vector2]:
 	rng.seed = layout_seed
 	var room_positions: Array[Vector2] = []
 	var last_variant_by_type: Dictionary = {}
+	var in_intro := show_intro_hints
 	for chunk_data in render_chunks:
 		var room: Dictionary = chunk_data as Dictionary
 		var chunk_name: String = str(room["chunk_name"])
@@ -233,6 +235,11 @@ func rebuild(render_chunks: Array) -> Array[Vector2]:
 			push_error("Brak sceny chunka: %s" % scene_path)
 			continue
 		var chunk := packed_scene.instantiate() as Node2D
+		for child in chunk.get_children():
+			if child is Label and child.is_in_group(&"tutorial_hint"):
+				child.visible = in_intro
+		if chunk_name == "TripleSplit":
+			in_intro = false
 		chunk.name = "Chunk_%s" % chunk_name
 		chunk.position = room["world_position"] as Vector2
 		var ground: TileMapLayer = chunk.get_node_or_null("Ground") as TileMapLayer

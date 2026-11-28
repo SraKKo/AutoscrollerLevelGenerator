@@ -11,6 +11,9 @@ const ROUTE_ENTRANCE_FLOORS := {272: -160.0, 816: 128.0, 1360: 384.0}
 const PREVIEW_ROWS := {272: 0, 816: 1, 1360: 2}
 const LANE_NAMES := ["Upper", "Middle", "Lower"]
 
+# The chunk demo previews every fork. Gameplay sets its own onboarding limit.
+var preview_limit := -1
+
 func update_signs(level: Dictionary, render_chunks: Array) -> void:
 	_clear_signs()
 	if level.is_empty():
@@ -25,8 +28,9 @@ func update_signs(level: Dictionary, render_chunks: Array) -> void:
 	var branches: Array = level["branches"] as Array
 	var graph: Dictionary = level["graph"] as Dictionary
 	var goal_id: int = int(level["goal_id"])
-	for branch_data in branches:
-		var branch: Dictionary = branch_data as Dictionary
+	for index in branches.size():
+		var branch: Dictionary = branches[index]
+		var show_preview := preview_limit < 0 or index < preview_limit
 		var split_index: int = int(branch["split_index"])
 		var split_chunk: Dictionary = render_chunks[split_index] as Dictionary
 		var split_position: Vector2 = split_chunk["world_position"] as Vector2
@@ -37,11 +41,11 @@ func update_signs(level: Dictionary, render_chunks: Array) -> void:
 			var route_id: int = int(route["route_id"])
 			var route_level: int = int(route["level"])
 			if path_lookup.has(route_id):
-				_add_sign(GOOD_ROUTE_TEXTURE, split_position, route_level, "Good", "Direct route")
+				_add_sign(GOOD_ROUTE_TEXTURE, split_position, route_level, "Good", "Direct route", show_preview)
 			elif _can_reach_goal(graph, route_id, goal_id):
-				_add_sign(MAYBE_ROUTE_TEXTURE, split_position, route_level, "Maybe", "Detour to portal")
+				_add_sign(MAYBE_ROUTE_TEXTURE, split_position, route_level, "Maybe", "Detour to portal", show_preview)
 			else:
-				_add_sign(BAD_ROUTE_TEXTURE, split_position, route_level, "Bad", "Dead end")
+				_add_sign(BAD_ROUTE_TEXTURE, split_position, route_level, "Bad", "Dead end", show_preview)
 
 func _can_reach_goal(graph: Dictionary, route_id: int, goal_id: int) -> bool:
 	var result: Dictionary = PlatformGraphValidator.validate_path(
@@ -57,7 +61,7 @@ func _clear_signs() -> void:
 		remove_child(child)
 		child.queue_free()
 
-func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, sign_name: String, destination: String) -> void:
+func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, sign_name: String, destination: String, show_preview: bool) -> void:
 	var sign := Sprite2D.new()
 	sign.name = "%sRoute" % sign_name
 	sign.texture = texture
@@ -67,6 +71,8 @@ func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, si
 	sign.position = (split_position + Vector2(SIGN_X_OFFSET, floor_y - texture.get_height())).snapped(GRID_SIZE)
 	sign.z_index = 10
 	add_child(sign)
+	if not show_preview:
+		return
 	var row: int = PREVIEW_ROWS[route_level]
 	var icon := Sprite2D.new()
 	icon.texture = texture

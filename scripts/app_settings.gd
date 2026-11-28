@@ -13,6 +13,7 @@ var show_fps := false
 var master_volume := 100.0
 var music_volume := 100.0
 var effects_volume := 100.0
+var has_started_run := false
 
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func load_settings() -> void:
 	master_volume = clampf(float(config.get_value("audio", "master", 100.0)), 0.0, 100.0)
 	music_volume = clampf(float(config.get_value("audio", "music", 100.0)), 0.0, 100.0)
 	effects_volume = clampf(float(config.get_value("audio", "effects", 100.0)), 0.0, 100.0)
+	has_started_run = bool(config.get_value("tutorial", "has_started_run", false))
 
 
 func apply_settings() -> void:
@@ -61,6 +63,7 @@ func save_settings() -> Error:
 	config.set_value("audio", "master", master_volume)
 	config.set_value("audio", "music", music_volume)
 	config.set_value("audio", "effects", effects_volume)
+	config.set_value("tutorial", "has_started_run", has_started_run)
 	return config.save(SETTINGS_PATH)
 
 

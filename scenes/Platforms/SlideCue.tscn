@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[node name="SlideCue" type="Label"]
+[node name="SlideCue" type="Label" groups=["tutorial_hint"]]
 z_index = 10
 mouse_filter = 2
 theme_override_constants/outline_size = 5

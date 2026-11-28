@@ -90,7 +90,7 @@ position = Vector2(448, 64)
 collision_layer = 0
 script = ExtResource("5_mciet")
 
-[node name="JumpHint" type="Label" parent="."]
+[node name="JumpHint" type="Label" parent="." groups=["tutorial_hint"]]
 position = Vector2(-608, 0)
 mouse_filter = 2
 z_index = 10
