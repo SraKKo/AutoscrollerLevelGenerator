@@ -19,17 +19,14 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 position = Vector2(-544, 128)
 patrol_distance = 64.0
 
-[node name="Board" parent="PicketMiddle10" instance=ExtResource("Board")]
-position = Vector2(-448, 64)
-
 [node name="Coin" parent="PicketMiddle10" instance=ExtResource("Coin")]
 position = Vector2(-672, 96)
 
 [node name="Coin2" parent="PicketMiddle10" instance=ExtResource("Coin")]
-position = Vector2(-480, 32)
+position = Vector2(-480, 96)
 
 [node name="Coin3" parent="PicketMiddle10" instance=ExtResource("Coin")]
-position = Vector2(-384, 64)
+position = Vector2(-384, 96)
 
 [node name="StairCacheMiddle27" type="Node2D" parent="."]
 

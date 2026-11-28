@@ -38,7 +38,7 @@ position = Vector2(-480, 576)
 [node name="ArrowGalleryLower26" type="Node2D" parent="."]
 
 [node name="ArrowSlit" parent="ArrowGalleryLower26" instance=ExtResource("Arrows")]
-position = Vector2(0, 576)
+position = Vector2(0, 608)
 
 [node name="Coin" parent="ArrowGalleryLower26" instance=ExtResource("Coin")]
 position = Vector2(-192, 576)

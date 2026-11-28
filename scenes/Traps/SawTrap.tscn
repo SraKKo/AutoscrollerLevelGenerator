@@ -211,7 +211,6 @@ radius = 12.0
 
 [node name="SawTrap" type="Area2D"]
 z_index = 15
-scale = Vector2(2, 2)
 collision_layer = 0
 monitorable = false
 script = ExtResource("script")

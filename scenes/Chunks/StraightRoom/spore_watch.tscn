@@ -16,18 +16,15 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 
 [node name="BruteBridgeMiddle9" type="Node2D" parent="."]
 
-[node name="Board" parent="BruteBridgeMiddle9" instance=ExtResource("Board")]
-position = Vector2(-704, 64)
-
 [node name="Warden" parent="BruteBridgeMiddle9" instance=ExtResource("Brute")]
 position = Vector2(-512, 128)
 patrol_distance = 64.0
 
 [node name="Coin" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-704, 32)
+position = Vector2(-704, 96)
 
 [node name="Coin2" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-512, 64)
+position = Vector2(-512, 96)
 
 [node name="Coin3" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
 position = Vector2(-416, 96)
@@ -71,3 +68,27 @@ position = Vector2(608, 64)
 
 [node name="Coin3" parent="HighArcherMiddle43" instance=ExtResource("Coin")]
 position = Vector2(704, 96)
+
+[node name="PitBlade1" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(-128, 192)
+
+[node name="PitBlade2" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(-96, 192)
+
+[node name="PitBlade3" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(-32, 192)
+
+[node name="PitBlade4" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(0, 192)
+
+[node name="PitBlade5" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(32, 192)
+
+[node name="PitBlade6" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(64, 192)
+
+[node name="PitBlade7" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(128, 192)
+
+[node name="PitBlade8" parent="SplitHeightMiddle26" instance=ExtResource("Saw")]
+position = Vector2(160, 192)

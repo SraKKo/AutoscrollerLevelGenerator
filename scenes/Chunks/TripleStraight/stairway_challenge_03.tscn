@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4]
+[gd_scene load_steps=17 format=4]
 
 [ext_resource type="Texture2D" path="res://Assets/Chunks/Seamless/TripleStraight.png" id="1_gpcyg"]
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="2_py4qg"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" path="res://scenes/Enemies/SmallMushroom.tscn" id="13_e6xx8"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/BigMushroom.tscn" id="14_065tc"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/GoblinMage.tscn" id="15_x7jbj"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/WideLanding.tscn" id="WideLanding"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/SlideCue.tscn" id="SlideCue"]
 
 [node name="StairwayChallenge03" type="Node2D"]
 
@@ -27,16 +29,10 @@ tile_map_data = PackedByteArray("AADv/wsAAAABAAEAAADv/wwAAAABAAEAAADv//n/AAABAAE
 
 [node name="Upper_StairwayChallenge" type="Node2D" parent="."]
 
-[node name="Step1" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("4_jk7md")]
+[node name="Step1" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("WideLanding")]
 position = Vector2(-704, -448)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins11" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-736, -480)
-collision_layer = 0
-script = ExtResource("6_1pfss")
 
 [node name="StepCoins12" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
 z_index = 21
@@ -44,22 +40,10 @@ position = Vector2(-704, -480)
 collision_layer = 0
 script = ExtResource("6_1pfss")
 
-[node name="StepCoins13" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-672, -480)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="Step2" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("4_jk7md")]
+[node name="Step2" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("WideLanding")]
 position = Vector2(-544, -512)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins21" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-576, -544)
-collision_layer = 0
-script = ExtResource("6_1pfss")
 
 [node name="StepCoins22" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
 z_index = 21
@@ -67,22 +51,10 @@ position = Vector2(-544, -544)
 collision_layer = 0
 script = ExtResource("6_1pfss")
 
-[node name="StepCoins23" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-512, -544)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="Step3" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("4_jk7md")]
+[node name="Step3" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("WideLanding")]
 position = Vector2(-384, -576)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins31" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-416, -608)
-collision_layer = 0
-script = ExtResource("6_1pfss")
 
 [node name="StepCoins32" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
 z_index = 21
@@ -90,55 +62,14 @@ position = Vector2(-384, -608)
 collision_layer = 0
 script = ExtResource("6_1pfss")
 
-[node name="StepCoins33" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-352, -608)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="Step4" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("4_jk7md")]
-position = Vector2(-224, -512)
+[node name="Step5" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("WideLanding")]
+position = Vector2(-96, -448)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins41" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-256, -544)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="StepCoins42" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-224, -544)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="StepCoins43" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-192, -544)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="Step5" type="StaticBody2D" parent="Upper_StairwayChallenge" instance=ExtResource("4_jk7md")]
-position = Vector2(-64, -448)
-collision_layer = 2
-collision_mask = 0
-
-[node name="StepCoins51" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-96, -480)
-collision_layer = 0
-script = ExtResource("6_1pfss")
 
 [node name="StepCoins52" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
 z_index = 21
-position = Vector2(-64, -480)
-collision_layer = 0
-script = ExtResource("6_1pfss")
-
-[node name="StepCoins53" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("5_vpe4u")]
-z_index = 21
-position = Vector2(-32, -480)
+position = Vector2(-96, -480)
 collision_layer = 0
 script = ExtResource("6_1pfss")
 
@@ -158,7 +89,7 @@ script = ExtResource("10_2w8q2")
 
 [node name="PitSawFill1" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
 z_index = 15
-position = Vector2(-624, -352)
+position = Vector2(-608, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("10_2w8q2")
@@ -172,7 +103,7 @@ script = ExtResource("10_2w8q2")
 
 [node name="PitSawFill2" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
 z_index = 15
-position = Vector2(-400, -352)
+position = Vector2(-384, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("10_2w8q2")
@@ -186,7 +117,7 @@ script = ExtResource("10_2w8q2")
 
 [node name="PitSawFill3" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
 z_index = 15
-position = Vector2(-176, -352)
+position = Vector2(-160, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("10_2w8q2")
@@ -273,7 +204,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("12_vykg3")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="SmallMushroom" type="CharacterBody2D" parent="Middle_Combat" instance=ExtResource("13_e6xx8")]
 z_index = 20
@@ -304,7 +234,6 @@ health = 3
 move_speed = 30.0
 detection_range = 320.0
 attack_range = 42.0
-windup_time = 0.0
 recovery_time = 0.8
 
 [node name="Mage" type="CharacterBody2D" parent="Middle_Combat" instance=ExtResource("15_x7jbj")]
@@ -425,7 +354,7 @@ script = ExtResource("10_2w8q2")
 
 [node name="JumpCoins1" type="Area2D" parent="Lower_RiskyShortcut" instance=ExtResource("5_vpe4u")]
 z_index = 21
-position = Vector2(256, 544)
+position = Vector2(192, 576)
 collision_layer = 0
 script = ExtResource("6_1pfss")
 
@@ -437,7 +366,7 @@ script = ExtResource("6_1pfss")
 
 [node name="JumpCoins3" type="Area2D" parent="Lower_RiskyShortcut" instance=ExtResource("5_vpe4u")]
 z_index = 21
-position = Vector2(320, 544)
+position = Vector2(384, 576)
 collision_layer = 0
 script = ExtResource("6_1pfss")
 
@@ -477,3 +406,131 @@ position = Vector2(864, 608)
 collision_layer = 0
 script = ExtResource("8_yocqe")
 coin_value = 30
+
+[node name="PitBlade1" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-704, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade2" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-672, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade3" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-640, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade4" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-576, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade5" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-544, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade6" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-480, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade7" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-448, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade8" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-416, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade9" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-352, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade10" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-320, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade11" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-256, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade12" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-224, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade13" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-192, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade14" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-128, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade15" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-96, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade16" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(-32, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="PitBlade17" type="Area2D" parent="Upper_StairwayChallenge" instance=ExtResource("9_ect15")]
+z_index = 15
+position = Vector2(0, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("10_2w8q2")
+
+[node name="SlideCue1" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(64, -548)
+
+[node name="SlideCue2" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(-928, 540)
+
+[node name="SlideCue3" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(352, 540)

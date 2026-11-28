@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Platforms/WoodenPlatformGrid.tscn" id="Base"]
+
+[sub_resource type="RectangleShape2D" id="Surface"]
+size = Vector2(128, 4)
+
+[node name="WideLanding" instance=ExtResource("Base")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-48, -9)
+texture_repeat = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 32)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("Surface")

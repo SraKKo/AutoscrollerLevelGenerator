@@ -240,7 +240,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("12_63ys2")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="SmallMushroom373" type="CharacterBody2D" parent="MiddleCombatReward" instance=ExtResource("13_r6mv1")]
 z_index = 20
@@ -271,7 +270,6 @@ health = 3
 move_speed = 30.0
 detection_range = 320.0
 attack_range = 42.0
-windup_time = 0.0
 recovery_time = 0.8
 
 [node name="GoblinMage376" type="CharacterBody2D" parent="MiddleCombatReward" instance=ExtResource("15_7snan")]
@@ -367,6 +365,118 @@ script = ExtResource("8_q6p1g")
 [node name="Saw389" type="Area2D" parent="LowerDeadEnd" instance=ExtResource("7_un3m5")]
 z_index = 15
 position = Vector2(416, 608)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade1" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-736, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade2" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-672, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade3" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-640, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade4" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-608, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade5" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-576, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade6" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-544, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade7" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-512, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade8" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-448, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade9" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-416, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade10" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-384, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade11" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-352, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade12" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-320, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade13" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-288, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade14" type="Area2D" parent="UpperPlatformReward" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(-224, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade15" type="Area2D" parent="LowerDeadEnd" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(416, 512)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_q6p1g")
+
+[node name="PitBlade16" type="Area2D" parent="LowerDeadEnd" instance=ExtResource("7_un3m5")]
+z_index = 15
+position = Vector2(416, 576)
 collision_layer = 0
 monitorable = false
 script = ExtResource("8_q6p1g")

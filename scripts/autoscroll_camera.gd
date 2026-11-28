@@ -12,10 +12,24 @@ extends Camera2D
 @onready var target: Node2D = get_node_or_null(target_path) as Node2D
 @export var player: CharacterBody2D
 
+# A brief slowdown buys one input near the trailing edge. Running ahead rearms it.
+const EDGE_GRACE_TIME := 0.75
+var edge_grace_left := EDGE_GRACE_TIME
+
 
 func _physics_process(delta: float) -> void:
 	if scrolling:
-		global_position.x += scroll_speed * delta
+		var advance := scroll_speed * delta
+		if is_instance_valid(player):
+			var half_width := get_viewport_rect().size.x / (2.0 * zoom.x)
+			var distance_from_left := player.global_position.x - (global_position.x - half_width)
+			if distance_from_left >= 256.0:
+				edge_grace_left = EDGE_GRACE_TIME
+			elif distance_from_left <= 160.0 and edge_grace_left > 0.0:
+				var grace_step := minf(delta, edge_grace_left)
+				advance -= scroll_speed * 0.65 * grace_step
+				edge_grace_left -= grace_step
+		global_position.x += advance
 	if target != null:
 		var follow_weight := 1.0 - exp(-vertical_follow_speed * delta)
 		global_position.y = lerpf(global_position.y, target.global_position.y, follow_weight)
@@ -26,6 +40,7 @@ func _physics_process(delta: float) -> void:
 
 
 func reset_to(start_position: Vector2) -> void:
+	edge_grace_left = EDGE_GRACE_TIME
 	global_position = start_position
 	_clamp_vertical_position()
 	reset_smoothing()

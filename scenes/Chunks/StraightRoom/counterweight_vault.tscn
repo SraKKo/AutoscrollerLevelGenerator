@@ -37,7 +37,7 @@ position = Vector2(-384, 96)
 [node name="ArrowGalleryMiddle26" type="Node2D" parent="."]
 
 [node name="ArrowSlit" parent="ArrowGalleryMiddle26" instance=ExtResource("Arrows")]
-position = Vector2(0, 64)
+position = Vector2(0, 96)
 
 [node name="Coin" parent="ArrowGalleryMiddle26" instance=ExtResource("Coin")]
 position = Vector2(-192, 64)
@@ -70,3 +70,12 @@ position = Vector2(384, 32)
 
 [node name="Coin2" parent="BatSpringMiddle43" instance=ExtResource("Coin")]
 position = Vector2(544, 0)
+
+[node name="PitBlade1" parent="SteppingStonesMiddle9" instance=ExtResource("Saw")]
+position = Vector2(-704, 192)
+
+[node name="PitBlade2" parent="SteppingStonesMiddle9" instance=ExtResource("Saw")]
+position = Vector2(-480, 192)
+
+[node name="PitBlade3" parent="SteppingStonesMiddle9" instance=ExtResource("Saw")]
+position = Vector2(-416, 192)

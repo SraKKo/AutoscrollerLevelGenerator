@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4]
+[gd_scene load_steps=16 format=4]
 
 [ext_resource type="Texture2D" path="res://Assets/Chunks/Seamless/TripleCloseUpper.png" id="1_on44h"]
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="2_fnbpd"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://scripts/ground_enemy.gd" id="12_xsdcy"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/SmallMushroom.tscn" id="13_tolkw"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/BigMushroom.tscn" id="14_5lr6s"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/WideLanding.tscn" id="WideLanding"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/SlideCue.tscn" id="SlideCue"]
 
 [node name="LowerRewards01" type="Node2D"]
 
@@ -49,17 +51,17 @@ script = ExtResource("5_fxemy")
 
 [node name="Middle_PlatformReward" type="Node2D" parent="."]
 
-[node name="Landing01" type="StaticBody2D" parent="Middle_PlatformReward" instance=ExtResource("6_aqm3l")]
+[node name="Landing01" type="StaticBody2D" parent="Middle_PlatformReward" instance=ExtResource("WideLanding")]
 position = Vector2(-704, 128)
 collision_layer = 2
 collision_mask = 0
 
-[node name="Landing02" type="StaticBody2D" parent="Middle_PlatformReward" instance=ExtResource("6_aqm3l")]
+[node name="Landing02" type="StaticBody2D" parent="Middle_PlatformReward" instance=ExtResource("WideLanding")]
 position = Vector2(-544, 64)
 collision_layer = 2
 collision_mask = 0
 
-[node name="Landing03" type="StaticBody2D" parent="Middle_PlatformReward" instance=ExtResource("6_aqm3l")]
+[node name="Landing03" type="StaticBody2D" parent="Middle_PlatformReward" instance=ExtResource("WideLanding")]
 position = Vector2(-384, 96)
 collision_layer = 2
 collision_mask = 0
@@ -71,16 +73,9 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")
 
-[node name="PitSawFillLeft" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
-z_index = 15
-position = Vector2(-816, 224)
-collision_layer = 0
-monitorable = false
-script = ExtResource("5_fxemy")
-
 [node name="PitSawFill1" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
 z_index = 15
-position = Vector2(-656, 224)
+position = Vector2(-640, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")
@@ -94,7 +89,7 @@ script = ExtResource("5_fxemy")
 
 [node name="PitSawFill2" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
 z_index = 15
-position = Vector2(-496, 224)
+position = Vector2(-480, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")
@@ -108,7 +103,7 @@ script = ExtResource("5_fxemy")
 
 [node name="PitSawFillRight" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
 z_index = 15
-position = Vector2(-336, 224)
+position = Vector2(-320, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("5_fxemy")
@@ -200,7 +195,7 @@ script = ExtResource("5_fxemy")
 
 [node name="JumpArcCoins1" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("7_2wgjk")]
 z_index = 21
-position = Vector2(320, 32)
+position = Vector2(256, 64)
 collision_layer = 0
 script = ExtResource("8_3fcch")
 
@@ -212,7 +207,7 @@ script = ExtResource("8_3fcch")
 
 [node name="JumpArcCoins3" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("7_2wgjk")]
 z_index = 21
-position = Vector2(384, 32)
+position = Vector2(448, 64)
 collision_layer = 0
 script = ExtResource("8_3fcch")
 
@@ -260,7 +255,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("12_xsdcy")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="SmallMushroom" type="CharacterBody2D" parent="Lower_CombatReward" instance=ExtResource("13_tolkw")]
 z_index = 20
@@ -291,7 +285,6 @@ health = 3
 move_speed = 30.0
 detection_range = 320.0
 attack_range = 42.0
-windup_time = 0.0
 recovery_time = 0.8
 
 [node name="EarlyLoot1" type="Area2D" parent="Lower_CombatReward" instance=ExtResource("7_2wgjk")]
@@ -378,3 +371,76 @@ z_index = 21
 position = Vector2(992, 608)
 collision_layer = 0
 script = ExtResource("8_3fcch")
+
+[node name="PitBlade1" type="Area2D" parent="Upper_DeadEnd" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(96, -576)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade2" type="Area2D" parent="Upper_DeadEnd" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(96, -512)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade3" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-704, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade4" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-672, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade5" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-608, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade6" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-544, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade7" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-512, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade8" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-448, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade9" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-384, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="PitBlade10" type="Area2D" parent="Middle_PlatformReward" instance=ExtResource("4_c6af4")]
+z_index = 15
+position = Vector2(-352, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("5_fxemy")
+
+[node name="SlideCue1" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(-128, 28)

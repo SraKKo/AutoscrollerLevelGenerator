@@ -208,7 +208,7 @@ health = 3
 move_speed = 30.0
 detection_range = 320.0
 attack_range = 42.0
-windup_time = 0.0
+windup_time = 0.35
 recovery_time = 0.8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

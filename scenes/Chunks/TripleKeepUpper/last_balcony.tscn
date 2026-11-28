@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4]
+[gd_scene load_steps=7 format=4]
 
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="Ground"]
 [ext_resource type="PackedScene" path="res://scenes/Traps/LargeSaw.tscn" id="Saw"]
 [ext_resource type="PackedScene" path="res://scenes/Platforms/WoodenPlatformGrid.tscn" id="Board"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Coin.tscn" id="Coin"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Gem.tscn" id="Ore"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/MovingPlatform.tscn" id="MovingDeck"]
 
 [node name="LastBalcony" type="Node2D"]
 metadata/chunk_type = "TripleKeepUpper"
@@ -15,24 +16,24 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 [node name="BladeWall24" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall24" instance=ExtResource("Saw")]
-position = Vector2(320, -32)
+position = Vector2(288, -32)
 
 [node name="Saw2" parent="BladeWall24" instance=ExtResource("Saw")]
-position = Vector2(320, 32)
+position = Vector2(288, 32)
 
 [node name="Saw3" parent="BladeWall24" instance=ExtResource("Saw")]
-position = Vector2(320, 96)
+position = Vector2(288, 96)
 
 [node name="BladeWall40" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(448, 480)
+position = Vector2(416, 480)
 
 [node name="Saw2" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(448, 544)
+position = Vector2(416, 544)
 
 [node name="Saw3" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(448, 608)
+position = Vector2(416, 608)
 
 [node name="SplitHeightUpper9" type="Node2D" parent="."]
 
@@ -68,19 +69,14 @@ position = Vector2(-64, -480)
 [node name="Coin3" parent="CheckpointUpper26" instance=ExtResource("Coin")]
 position = Vector2(32, -480)
 
-[node name="Board" parent="CheckpointUpper26" instance=ExtResource("Board")]
-position = Vector2(96, -512)
-
 [node name="Coin4" parent="CheckpointUpper26" instance=ExtResource("Coin")]
-position = Vector2(96, -544)
+position = Vector2(96, -480)
 
 [node name="OreLoftUpper43" type="Node2D" parent="."]
 
-[node name="Board" parent="OreLoftUpper43" instance=ExtResource("Board")]
+[node name="OreLift" parent="OreLoftUpper43" instance=ExtResource("MovingDeck")]
 position = Vector2(384, -512)
-
-[node name="Board2" parent="OreLoftUpper43" instance=ExtResource("Board")]
-position = Vector2(544, -576)
+travel = Vector2(160, -64)
 
 [node name="Ore" parent="OreLoftUpper43" instance=ExtResource("Ore")]
 position = Vector2(576, -608)
@@ -104,3 +100,39 @@ position = Vector2(832, -480)
 
 [node name="Ore" parent="PayChest6" instance=ExtResource("Ore")]
 position = Vector2(896, -480)
+
+[node name="PitBlade1" parent="BladeWall24" instance=ExtResource("Saw")]
+position = Vector2(288, 0)
+
+[node name="PitBlade2" parent="BladeWall24" instance=ExtResource("Saw")]
+position = Vector2(288, 64)
+
+[node name="PitBlade3" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(416, 512)
+
+[node name="PitBlade4" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(416, 576)
+
+[node name="PitBlade5" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-672, -384)
+
+[node name="PitBlade6" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-640, -384)
+
+[node name="PitBlade7" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-576, -384)
+
+[node name="PitBlade8" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-544, -384)
+
+[node name="PitBlade9" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-512, -384)
+
+[node name="PitBlade10" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-480, -384)
+
+[node name="PitBlade11" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-416, -384)
+
+[node name="PitBlade12" parent="SplitHeightUpper9" instance=ExtResource("Saw")]
+position = Vector2(-384, -384)

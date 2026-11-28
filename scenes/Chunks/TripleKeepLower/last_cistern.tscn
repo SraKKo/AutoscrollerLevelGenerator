@@ -16,24 +16,24 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 [node name="BladeWall6" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall6" instance=ExtResource("Saw")]
-position = Vector2(320, -608)
+position = Vector2(288, -608)
 
 [node name="Saw2" parent="BladeWall6" instance=ExtResource("Saw")]
-position = Vector2(320, -544)
+position = Vector2(288, -544)
 
 [node name="Saw3" parent="BladeWall6" instance=ExtResource("Saw")]
-position = Vector2(320, -480)
+position = Vector2(288, -480)
 
 [node name="BladeWall24" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall24" instance=ExtResource("Saw")]
-position = Vector2(448, -32)
+position = Vector2(416, -32)
 
 [node name="Saw2" parent="BladeWall24" instance=ExtResource("Saw")]
-position = Vector2(448, 32)
+position = Vector2(416, 32)
 
 [node name="Saw3" parent="BladeWall24" instance=ExtResource("Saw")]
-position = Vector2(448, 96)
+position = Vector2(416, 96)
 
 [node name="DuckOrClimbLower9" type="Node2D" parent="."]
 
@@ -66,11 +66,8 @@ position = Vector2(-64, 608)
 [node name="Coin3" parent="CheckpointLower26" instance=ExtResource("Coin")]
 position = Vector2(32, 608)
 
-[node name="Board" parent="CheckpointLower26" instance=ExtResource("Board")]
-position = Vector2(96, 576)
-
 [node name="Coin4" parent="CheckpointLower26" instance=ExtResource("Coin")]
-position = Vector2(96, 544)
+position = Vector2(96, 608)
 
 [node name="BuriedStairsLower43" type="Node2D" parent="."]
 
@@ -109,3 +106,15 @@ position = Vector2(832, 608)
 
 [node name="Ore" parent="PayChest40" instance=ExtResource("Ore")]
 position = Vector2(896, 608)
+
+[node name="PitBlade1" parent="BladeWall6" instance=ExtResource("Saw")]
+position = Vector2(288, -576)
+
+[node name="PitBlade2" parent="BladeWall6" instance=ExtResource("Saw")]
+position = Vector2(288, -512)
+
+[node name="PitBlade3" parent="BladeWall24" instance=ExtResource("Saw")]
+position = Vector2(416, 0)
+
+[node name="PitBlade4" parent="BladeWall24" instance=ExtResource("Saw")]
+position = Vector2(416, 64)

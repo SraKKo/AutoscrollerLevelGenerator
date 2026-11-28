@@ -12,10 +12,16 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 [node name="BladeWall40" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(224, 480)
+position = Vector2(192, 480)
 
 [node name="Saw2" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(224, 544)
+position = Vector2(192, 544)
 
 [node name="Saw3" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(224, 608)
+position = Vector2(192, 608)
+
+[node name="PitBlade1" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(192, 512)
+
+[node name="PitBlade2" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(192, 576)

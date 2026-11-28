@@ -89,3 +89,11 @@ z_index = 21
 position = Vector2(448, 64)
 collision_layer = 0
 script = ExtResource("5_mciet")
+
+[node name="JumpHint" type="Label" parent="."]
+position = Vector2(-608, 0)
+mouse_filter = 2
+z_index = 10
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 22
+text = "Hold Space for a higher jump"

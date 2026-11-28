@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4]
+[gd_scene load_steps=11 format=4]
 
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="Ground"]
 [ext_resource type="PackedScene" path="res://scenes/Traps/LargeSaw.tscn" id="Saw"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/Enemies/GoblinMage.tscn" id="Caster"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/SmallMushroom.tscn" id="Spore"]
 [ext_resource type="PackedScene" path="res://scenes/Traps/ArrowTrap.tscn" id="Arrows"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/MovingPlatform.tscn" id="MovingDeck"]
 
 [node name="ThreeTolls" type="Node2D"]
 metadata/chunk_type = "TripleStraight"
@@ -55,14 +56,12 @@ position = Vector2(96, -512)
 
 [node name="BrokenChainUpper43" type="Node2D" parent="."]
 
-[node name="Board" parent="BrokenChainUpper43" instance=ExtResource("Board")]
+[node name="PitFerry" parent="BrokenChainUpper43" instance=ExtResource("MovingDeck")]
 position = Vector2(384, -448)
+travel = Vector2(192, -32)
 
 [node name="Coin" parent="BrokenChainUpper43" instance=ExtResource("Coin")]
 position = Vector2(384, -480)
-
-[node name="Board2" parent="BrokenChainUpper43" instance=ExtResource("Board")]
-position = Vector2(576, -480)
 
 [node name="Coin2" parent="BrokenChainUpper43" instance=ExtResource("Coin")]
 position = Vector2(576, -512)
@@ -85,17 +84,14 @@ position = Vector2(672, -512)
 position = Vector2(-576, 128)
 patrol_distance = 64.0
 
-[node name="Board" parent="PicketMiddle9" instance=ExtResource("Board")]
-position = Vector2(-480, 64)
-
 [node name="Coin" parent="PicketMiddle9" instance=ExtResource("Coin")]
 position = Vector2(-704, 96)
 
 [node name="Coin2" parent="PicketMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-512, 32)
+position = Vector2(-512, 96)
 
 [node name="Coin3" parent="PicketMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-416, 64)
+position = Vector2(-416, 96)
 
 [node name="HighArcherMiddle26" type="Node2D" parent="."]
 
@@ -176,7 +172,7 @@ position = Vector2(64, 576)
 [node name="ArrowGalleryLower43" type="Node2D" parent="."]
 
 [node name="ArrowSlit" parent="ArrowGalleryLower43" instance=ExtResource("Arrows")]
-position = Vector2(544, 576)
+position = Vector2(544, 608)
 
 [node name="Coin" parent="ArrowGalleryLower43" instance=ExtResource("Coin")]
 position = Vector2(352, 576)
@@ -189,3 +185,39 @@ position = Vector2(640, 544)
 
 [node name="Coin4" parent="ArrowGalleryLower43" instance=ExtResource("Coin")]
 position = Vector2(704, 608)
+
+[node name="PitBlade1" parent="SteppingStonesUpper9" instance=ExtResource("Saw")]
+position = Vector2(-704, -384)
+
+[node name="PitBlade2" parent="SteppingStonesUpper9" instance=ExtResource("Saw")]
+position = Vector2(-480, -384)
+
+[node name="PitBlade3" parent="SteppingStonesUpper9" instance=ExtResource("Saw")]
+position = Vector2(-416, -384)
+
+[node name="PitBlade4" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(384, -384)
+
+[node name="PitBlade5" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(416, -384)
+
+[node name="PitBlade6" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(448, -384)
+
+[node name="PitBlade7" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(512, -384)
+
+[node name="PitBlade8" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(544, -384)
+
+[node name="PitBlade9" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(576, -384)
+
+[node name="PitBlade10" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(608, -384)
+
+[node name="PitBlade11" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(640, -384)
+
+[node name="PitBlade12" parent="BrokenChainUpper43" instance=ExtResource("Saw")]
+position = Vector2(704, -384)

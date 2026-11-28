@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="Movement"]
+[ext_resource type="Texture2D" path="res://Assets/Misc/wooden_platform_96x32.png" id="Deck"]
+
+[sub_resource type="RectangleShape2D" id="Surface"]
+size = Vector2(96, 4)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("Movement")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-32, -9)
+texture = ExtResource("Deck")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 2)
+shape = SubResource("Surface")
+one_way_collision = true
+one_way_collision_margin = 4.0

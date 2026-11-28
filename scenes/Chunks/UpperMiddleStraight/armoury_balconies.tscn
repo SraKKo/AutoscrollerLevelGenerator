@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4]
+[gd_scene load_steps=10 format=4]
 
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="Ground"]
 [ext_resource type="PackedScene" path="res://scenes/Traps/LargeSaw.tscn" id="Saw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Gem.tscn" id="Ore"]
 [ext_resource type="PackedScene" path="res://scenes/Traps/ArrowTrap.tscn" id="Arrows"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/BigMushroom.tscn" id="Brute"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/MovingPlatform.tscn" id="MovingDeck"]
 
 [node name="ArmouryBalconies" type="Node2D"]
 metadata/chunk_type = "UpperMiddleStraight"
@@ -78,7 +79,7 @@ position = Vector2(672, -480)
 [node name="ArrowGalleryMiddle9" type="Node2D" parent="."]
 
 [node name="ArrowSlit" parent="ArrowGalleryMiddle9" instance=ExtResource("Arrows")]
-position = Vector2(-544, 64)
+position = Vector2(-544, 96)
 
 [node name="Coin" parent="ArrowGalleryMiddle9" instance=ExtResource("Coin")]
 position = Vector2(-736, 64)
@@ -94,29 +95,24 @@ position = Vector2(-384, 96)
 
 [node name="BruteBridgeMiddle26" type="Node2D" parent="."]
 
-[node name="Board" parent="BruteBridgeMiddle26" instance=ExtResource("Board")]
-position = Vector2(-160, 64)
-
 [node name="Warden" parent="BruteBridgeMiddle26" instance=ExtResource("Brute")]
 position = Vector2(32, 128)
 patrol_distance = 64.0
 
 [node name="Coin" parent="BruteBridgeMiddle26" instance=ExtResource("Coin")]
-position = Vector2(-160, 32)
+position = Vector2(-160, 96)
 
 [node name="Coin2" parent="BruteBridgeMiddle26" instance=ExtResource("Coin")]
-position = Vector2(32, 64)
+position = Vector2(32, 96)
 
 [node name="Coin3" parent="BruteBridgeMiddle26" instance=ExtResource("Coin")]
 position = Vector2(128, 96)
 
 [node name="OreLoftMiddle43" type="Node2D" parent="."]
 
-[node name="Board" parent="OreLoftMiddle43" instance=ExtResource("Board")]
+[node name="OreLift" parent="OreLoftMiddle43" instance=ExtResource("MovingDeck")]
 position = Vector2(384, 64)
-
-[node name="Board2" parent="OreLoftMiddle43" instance=ExtResource("Board")]
-position = Vector2(544, 0)
+travel = Vector2(160, -64)
 
 [node name="Ore" parent="OreLoftMiddle43" instance=ExtResource("Ore")]
 position = Vector2(576, -32)
@@ -129,3 +125,12 @@ position = Vector2(448, 0)
 
 [node name="Coin3" parent="OreLoftMiddle43" instance=ExtResource("Coin")]
 position = Vector2(672, 32)
+
+[node name="PitBlade1" parent="LongShortUpper9" instance=ExtResource("Saw")]
+position = Vector2(-704, -384)
+
+[node name="PitBlade2" parent="LongShortUpper9" instance=ExtResource("Saw")]
+position = Vector2(-640, -384)
+
+[node name="PitBlade3" parent="LongShortUpper9" instance=ExtResource("Saw")]
+position = Vector2(-416, -384)

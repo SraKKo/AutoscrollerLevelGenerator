@@ -225,3 +225,101 @@ z_index = 21
 position = Vector2(960, 96)
 collision_layer = 0
 script = ExtResource("6_0p4p3")
+
+[node name="PitBlade1" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-736, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade2" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-672, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade3" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-640, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade4" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-608, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade5" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-576, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade6" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-544, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade7" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-512, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade8" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-448, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade9" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-416, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade10" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-384, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade11" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-352, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade12" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-320, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade13" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-288, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")
+
+[node name="PitBlade14" type="Area2D" parent="SingleRouteGauntlet" instance=ExtResource("7_p5bqb")]
+z_index = 15
+position = Vector2(-224, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("8_pgitx")

@@ -100,7 +100,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("10_ont42")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="Mushroom" type="CharacterBody2D" parent="Lower_CombatReward" instance=ExtResource("11_fwq03")]
 z_index = 20
@@ -183,6 +182,20 @@ script = ExtResource("13_yat3l")
 [node name="WallSaw3" type="Area2D" parent="Middle_DeadEnd" instance=ExtResource("12_cf3qc")]
 z_index = 15
 position = Vector2(224, 96)
+collision_layer = 0
+monitorable = false
+script = ExtResource("13_yat3l")
+
+[node name="PitBlade1" type="Area2D" parent="Middle_DeadEnd" instance=ExtResource("12_cf3qc")]
+z_index = 15
+position = Vector2(224, 0)
+collision_layer = 0
+monitorable = false
+script = ExtResource("13_yat3l")
+
+[node name="PitBlade2" type="Area2D" parent="Middle_DeadEnd" instance=ExtResource("12_cf3qc")]
+z_index = 15
+position = Vector2(224, 64)
 collision_layer = 0
 monitorable = false
 script = ExtResource("13_yat3l")

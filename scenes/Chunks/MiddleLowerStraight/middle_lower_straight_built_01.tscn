@@ -34,7 +34,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_ruah7")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="SmallMushroom114" type="CharacterBody2D" parent="MiddleCombatRoute" instance=ExtResource("6_x8k0a")]
 z_index = 20
@@ -65,7 +64,6 @@ health = 3
 move_speed = 30.0
 detection_range = 320.0
 attack_range = 42.0
-windup_time = 0.0
 recovery_time = 0.8
 
 [node name="GoblinMage117" type="CharacterBody2D" parent="MiddleCombatRoute" instance=ExtResource("9_e1kn7")]
@@ -346,3 +344,101 @@ z_index = 21
 position = Vector2(960, 608)
 collision_layer = 0
 script = ExtResource("11_n2sl7")
+
+[node name="PitBlade1" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-736, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade2" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-672, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade3" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-640, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade4" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-608, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade5" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-576, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade6" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-544, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade7" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-512, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade8" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-448, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade9" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-416, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade10" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-384, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade11" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-352, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade12" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-320, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade13" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-288, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")
+
+[node name="PitBlade14" type="Area2D" parent="LowerPlatformRoute" instance=ExtResource("14_ehp83")]
+z_index = 15
+position = Vector2(-224, 736)
+collision_layer = 0
+monitorable = false
+script = ExtResource("15_liv1x")

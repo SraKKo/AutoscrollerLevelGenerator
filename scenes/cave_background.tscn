@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpc12wvrkeu0n"]
+[gd_scene load_steps=8 format=3 uid="uid://cpc12wvrkeu0n"]
 
 [ext_resource type="Texture2D" uid="uid://mgtb3rtyucaq" path="res://Assets/Tileset1/Background/Layers/1.png" id="1_front"]
 [ext_resource type="Texture2D" uid="uid://b0x6afbihiy3g" path="res://Assets/Tileset1/Background/Layers/2.png" id="2_mushrooms"]
@@ -7,77 +7,63 @@
 [ext_resource type="Texture2D" uid="uid://bl0131fe05hq5" path="res://Assets/Tileset1/Background/Layers/5.png" id="5_silhouette"]
 [ext_resource type="Texture2D" uid="uid://dtsqvj5sud508" path="res://Assets/Tileset1/Background/Layers/6.png" id="6_base"]
 
-[node name="CaveBackground" type="Node2D"]
-z_index = -100
+[ext_resource type="Script" path="res://scripts/cave_background.gd" id="Scroll"]
 
-[node name="Base" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.02, 0)
-repeat_size = Vector2(1600, 0)
-repeat_times = 3
+[node name="CaveBackground" type="CanvasLayer"]
+layer = -100
+process_mode = 3
+script = ExtResource("Scroll")
 
-[node name="Sprite" type="Sprite2D" parent="Base"]
-position = Vector2(0, 450)
+[node name="Base" type="Sprite2D" parent="."]
+metadata/scroll_factor = 0.02
+centered = false
+region_enabled = true
+texture_repeat = 2
 modulate = Color(0.66, 0.7, 0.82, 1)
 texture_filter = 1
-scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("6_base")
 
-[node name="Silhouette" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.1, 0)
-repeat_size = Vector2(1600, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Silhouette"]
-position = Vector2(0, 450)
+[node name="Silhouette" type="Sprite2D" parent="."]
+metadata/scroll_factor = 0.1
+centered = false
+region_enabled = true
+texture_repeat = 2
 modulate = Color(0.72, 0.75, 0.86, 1)
 texture_filter = 1
-scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("5_silhouette")
 
-[node name="Cave" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.18, 0)
-repeat_size = Vector2(1600, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Cave"]
-position = Vector2(0, 450)
+[node name="Cave" type="Sprite2D" parent="."]
+metadata/scroll_factor = 0.18
+centered = false
+region_enabled = true
+texture_repeat = 2
 modulate = Color(0.74, 0.77, 0.88, 1)
 texture_filter = 1
-scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("4_cave")
 
-[node name="Rocks" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.28, 0)
-repeat_size = Vector2(1600, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Rocks"]
-position = Vector2(0, 450)
+[node name="Rocks" type="Sprite2D" parent="."]
+metadata/scroll_factor = 0.28
+centered = false
+region_enabled = true
+texture_repeat = 2
 modulate = Color(0.76, 0.79, 0.9, 1)
 texture_filter = 1
-scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("3_rocks")
 
-[node name="Mushrooms" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.4, 0)
-repeat_size = Vector2(1600, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Mushrooms"]
-position = Vector2(0, 450)
+[node name="Mushrooms" type="Sprite2D" parent="."]
+metadata/scroll_factor = 0.4
+centered = false
+region_enabled = true
+texture_repeat = 2
 modulate = Color(0.82, 0.82, 0.92, 1)
 texture_filter = 1
-scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("2_mushrooms")
 
-[node name="Foreground" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.58, 0)
-repeat_size = Vector2(1600, 0)
-repeat_times = 3
-
-[node name="Sprite" type="Sprite2D" parent="Foreground"]
-position = Vector2(0, 450)
+[node name="Foreground" type="Sprite2D" parent="."]
+metadata/scroll_factor = 0.58
+centered = false
+region_enabled = true
+texture_repeat = 2
 modulate = Color(0.82, 0.84, 0.94, 1)
 texture_filter = 1
-scale = Vector2(2.777778, 2.777778)
 texture = ExtResource("1_front")

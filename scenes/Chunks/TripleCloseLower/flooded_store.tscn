@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4]
+[gd_scene load_steps=9 format=4]
 
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="Ground"]
 [ext_resource type="PackedScene" path="res://scenes/Traps/LargeSaw.tscn" id="Saw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/Enemies/Bat.tscn" id="Bat"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Gem.tscn" id="Ore"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/BigMushroom.tscn" id="Brute"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/MovingPlatform.tscn" id="MovingDeck"]
 
 [node name="FloodedStore" type="Node2D"]
 metadata/chunk_type = "TripleCloseLower"
@@ -17,24 +18,22 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 [node name="BladeWall40" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(320, 480)
+position = Vector2(288, 480)
 
 [node name="Saw2" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(320, 544)
+position = Vector2(288, 544)
 
 [node name="Saw3" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(320, 608)
+position = Vector2(288, 608)
 
 [node name="BrokenChainUpper9" type="Node2D" parent="."]
 
-[node name="Board" parent="BrokenChainUpper9" instance=ExtResource("Board")]
+[node name="PitFerry" parent="BrokenChainUpper9" instance=ExtResource("MovingDeck")]
 position = Vector2(-704, -448)
+travel = Vector2(192, -32)
 
 [node name="Coin" parent="BrokenChainUpper9" instance=ExtResource("Coin")]
 position = Vector2(-704, -480)
-
-[node name="Board2" parent="BrokenChainUpper9" instance=ExtResource("Board")]
-position = Vector2(-512, -480)
 
 [node name="Coin2" parent="BrokenChainUpper9" instance=ExtResource("Coin")]
 position = Vector2(-512, -512)
@@ -62,11 +61,8 @@ position = Vector2(-64, -480)
 [node name="Coin3" parent="CheckpointUpper26" instance=ExtResource("Coin")]
 position = Vector2(32, -480)
 
-[node name="Board" parent="CheckpointUpper26" instance=ExtResource("Board")]
-position = Vector2(96, -512)
-
 [node name="Coin4" parent="CheckpointUpper26" instance=ExtResource("Coin")]
-position = Vector2(96, -544)
+position = Vector2(96, -480)
 
 [node name="BatSpringUpper43" type="Node2D" parent="."]
 
@@ -101,18 +97,15 @@ position = Vector2(896, -480)
 
 [node name="BruteBridgeMiddle9" type="Node2D" parent="."]
 
-[node name="Board" parent="BruteBridgeMiddle9" instance=ExtResource("Board")]
-position = Vector2(-704, 64)
-
 [node name="Warden" parent="BruteBridgeMiddle9" instance=ExtResource("Brute")]
 position = Vector2(-512, 128)
 patrol_distance = 64.0
 
 [node name="Coin" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-704, 32)
+position = Vector2(-704, 96)
 
 [node name="Coin2" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-512, 64)
+position = Vector2(-512, 96)
 
 [node name="Coin3" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
 position = Vector2(-416, 96)
@@ -128,19 +121,14 @@ position = Vector2(-64, 96)
 [node name="Coin3" parent="CheckpointMiddle26" instance=ExtResource("Coin")]
 position = Vector2(32, 96)
 
-[node name="Board" parent="CheckpointMiddle26" instance=ExtResource("Board")]
-position = Vector2(96, 64)
-
 [node name="Coin4" parent="CheckpointMiddle26" instance=ExtResource("Coin")]
-position = Vector2(96, 32)
+position = Vector2(96, 96)
 
 [node name="OreLoftMiddle43" type="Node2D" parent="."]
 
-[node name="Board" parent="OreLoftMiddle43" instance=ExtResource("Board")]
+[node name="OreLift" parent="OreLoftMiddle43" instance=ExtResource("MovingDeck")]
 position = Vector2(384, 64)
-
-[node name="Board2" parent="OreLoftMiddle43" instance=ExtResource("Board")]
-position = Vector2(544, 0)
+travel = Vector2(160, -64)
 
 [node name="Ore" parent="OreLoftMiddle43" instance=ExtResource("Ore")]
 position = Vector2(576, -32)
@@ -164,3 +152,36 @@ position = Vector2(832, 96)
 
 [node name="Ore" parent="PayChest24" instance=ExtResource("Ore")]
 position = Vector2(896, 96)
+
+[node name="PitBlade1" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(288, 512)
+
+[node name="PitBlade2" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(288, 576)
+
+[node name="PitBlade3" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-704, -384)
+
+[node name="PitBlade4" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-672, -384)
+
+[node name="PitBlade5" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-640, -384)
+
+[node name="PitBlade6" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-576, -384)
+
+[node name="PitBlade7" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-544, -384)
+
+[node name="PitBlade8" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-512, -384)
+
+[node name="PitBlade9" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-480, -384)
+
+[node name="PitBlade10" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-448, -384)
+
+[node name="PitBlade11" parent="BrokenChainUpper9" instance=ExtResource("Saw")]
+position = Vector2(-384, -384)

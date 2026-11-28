@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4]
+[gd_scene load_steps=16 format=4]
 
 [ext_resource type="Texture2D" path="res://Assets/Chunks/Seamless/TripleStraight.png" id="1_7vtr4"]
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="2_qtj8q"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/Enemies/SmallMushroom.tscn" id="13_oyjli"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/BigMushroom.tscn" id="14_1yibk"]
 [ext_resource type="PackedScene" path="res://scenes/Enemies/GoblinMage.tscn" id="15_noujf"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/SlideCue.tscn" id="SlideCue"]
 
 [node name="ThreeRoutes01" type="Node2D"]
 
@@ -29,19 +30,19 @@ tile_map_data = PackedByteArray("AADv//P/AAABAAEAAADv//T/AAABAAEAAADv/wsAAAABAAE
 
 [node name="JumpCoins1" type="Area2D" parent="Upper_Platforming" instance=ExtResource("4_1oull")]
 z_index = 21
-position = Vector2(-768, -544)
+position = Vector2(-512, -512)
 collision_layer = 0
 script = ExtResource("5_sxuak")
 
 [node name="JumpCoins2" type="Area2D" parent="Upper_Platforming" instance=ExtResource("4_1oull")]
 z_index = 21
-position = Vector2(-736, -544)
+position = Vector2(-416, -544)
 collision_layer = 0
 script = ExtResource("5_sxuak")
 
 [node name="JumpCoins3" type="Area2D" parent="Upper_Platforming" instance=ExtResource("4_1oull")]
 z_index = 21
-position = Vector2(-704, -544)
+position = Vector2(-320, -512)
 collision_layer = 0
 script = ExtResource("5_sxuak")
 
@@ -120,7 +121,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("12_8ryl0")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="SmallMushroom" type="CharacterBody2D" parent="Middle_Combat" instance=ExtResource("13_oyjli")]
 z_index = 20
@@ -146,7 +146,6 @@ health = 3
 move_speed = 30.0
 detection_range = 320.0
 attack_range = 42.0
-windup_time = 0.0
 recovery_time = 0.8
 
 [node name="Mage" type="CharacterBody2D" parent="Middle_Combat" instance=ExtResource("15_noujf")]
@@ -314,3 +313,6 @@ z_index = 21
 position = Vector2(704, 544)
 collision_layer = 0
 script = ExtResource("5_sxuak")
+
+[node name="SlideCue1" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(32, 540)

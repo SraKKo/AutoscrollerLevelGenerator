@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="Ground"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Coin.tscn" id="Coin"]
-[ext_resource type="PackedScene" path="res://scenes/Platforms/WoodenPlatformGrid.tscn" id="Board"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Gem.tscn" id="Ore"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/MovingPlatform.tscn" id="MovingDeck"]
 
 [node name="LanternYard" type="Node2D"]
 metadata/chunk_type = "Start"
@@ -33,19 +33,14 @@ position = Vector2(-64, 96)
 [node name="Coin3" parent="CheckpointMiddle26" instance=ExtResource("Coin")]
 position = Vector2(32, 96)
 
-[node name="Board" parent="CheckpointMiddle26" instance=ExtResource("Board")]
-position = Vector2(96, 64)
-
 [node name="Coin4" parent="CheckpointMiddle26" instance=ExtResource("Coin")]
-position = Vector2(96, 32)
+position = Vector2(96, 96)
 
 [node name="OreLoftMiddle43" type="Node2D" parent="."]
 
-[node name="Board" parent="OreLoftMiddle43" instance=ExtResource("Board")]
+[node name="OreLift" parent="OreLoftMiddle43" instance=ExtResource("MovingDeck")]
 position = Vector2(384, 64)
-
-[node name="Board2" parent="OreLoftMiddle43" instance=ExtResource("Board")]
-position = Vector2(544, 0)
+travel = Vector2(160, -64)
 
 [node name="Ore" parent="OreLoftMiddle43" instance=ExtResource("Ore")]
 position = Vector2(576, -32)
@@ -58,3 +53,11 @@ position = Vector2(448, 0)
 
 [node name="Coin3" parent="OreLoftMiddle43" instance=ExtResource("Coin")]
 position = Vector2(672, 32)
+
+[node name="JumpHint" type="Label" parent="."]
+position = Vector2(-608, 0)
+mouse_filter = 2
+z_index = 10
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 22
+text = "Hold Space for a higher jump"

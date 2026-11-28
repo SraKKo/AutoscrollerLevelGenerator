@@ -17,39 +17,36 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 [node name="BladeWall6" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall6" instance=ExtResource("Saw")]
-position = Vector2(320, -608)
+position = Vector2(288, -608)
 
 [node name="Saw2" parent="BladeWall6" instance=ExtResource("Saw")]
-position = Vector2(320, -544)
+position = Vector2(288, -544)
 
 [node name="Saw3" parent="BladeWall6" instance=ExtResource("Saw")]
-position = Vector2(320, -480)
+position = Vector2(288, -480)
 
 [node name="BladeWall40" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(448, 480)
+position = Vector2(416, 480)
 
 [node name="Saw2" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(448, 544)
+position = Vector2(416, 544)
 
 [node name="Saw3" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(448, 608)
+position = Vector2(416, 608)
 
 [node name="BruteBridgeMiddle9" type="Node2D" parent="."]
-
-[node name="Board" parent="BruteBridgeMiddle9" instance=ExtResource("Board")]
-position = Vector2(-704, 64)
 
 [node name="Warden" parent="BruteBridgeMiddle9" instance=ExtResource("Brute")]
 position = Vector2(-512, 128)
 patrol_distance = 64.0
 
 [node name="Coin" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-704, 32)
+position = Vector2(-704, 96)
 
 [node name="Coin2" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
-position = Vector2(-512, 64)
+position = Vector2(-512, 96)
 
 [node name="Coin3" parent="BruteBridgeMiddle9" instance=ExtResource("Coin")]
 position = Vector2(-416, 96)
@@ -65,11 +62,8 @@ position = Vector2(-64, 96)
 [node name="Coin3" parent="CheckpointMiddle26" instance=ExtResource("Coin")]
 position = Vector2(32, 96)
 
-[node name="Board" parent="CheckpointMiddle26" instance=ExtResource("Board")]
-position = Vector2(96, 64)
-
 [node name="Coin4" parent="CheckpointMiddle26" instance=ExtResource("Coin")]
-position = Vector2(96, 32)
+position = Vector2(96, 96)
 
 [node name="BatSpringMiddle43" type="Node2D" parent="."]
 
@@ -101,3 +95,15 @@ position = Vector2(832, 96)
 
 [node name="Ore" parent="PayChest24" instance=ExtResource("Ore")]
 position = Vector2(896, 96)
+
+[node name="PitBlade1" parent="BladeWall6" instance=ExtResource("Saw")]
+position = Vector2(288, -576)
+
+[node name="PitBlade2" parent="BladeWall6" instance=ExtResource("Saw")]
+position = Vector2(288, -512)
+
+[node name="PitBlade3" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(416, 512)
+
+[node name="PitBlade4" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(416, 576)

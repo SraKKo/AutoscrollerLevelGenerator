@@ -34,7 +34,6 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_4k1tg")
 move_speed = 90.0
-windup_time = 0.0
 
 [node name="Platform14" type="StaticBody2D" parent="FinalVault" instance=ExtResource("6_43mbb")]
 position = Vector2(-192, 64)

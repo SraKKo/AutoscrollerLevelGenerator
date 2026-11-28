@@ -8,6 +8,8 @@ const GRID_SIZE := Vector2(32.0, 32.0)
 const SIGN_X_OFFSET := 0.0
 # Floors at the entrances to the three separate paths in TripleSplit.
 const ROUTE_ENTRANCE_FLOORS := {272: -160.0, 816: 128.0, 1360: 384.0}
+const PREVIEW_ROWS := {272: 0, 816: 1, 1360: 2}
+const LANE_NAMES := ["Upper", "Middle", "Lower"]
 
 func update_signs(level: Dictionary, render_chunks: Array) -> void:
 	_clear_signs()
@@ -35,11 +37,11 @@ func update_signs(level: Dictionary, render_chunks: Array) -> void:
 			var route_id: int = int(route["route_id"])
 			var route_level: int = int(route["level"])
 			if path_lookup.has(route_id):
-				_add_sign(GOOD_ROUTE_TEXTURE, split_position, route_level, "Good")
+				_add_sign(GOOD_ROUTE_TEXTURE, split_position, route_level, "Good", "Direct route")
 			elif _can_reach_goal(graph, route_id, goal_id):
-				_add_sign(MAYBE_ROUTE_TEXTURE, split_position, route_level, "Maybe")
+				_add_sign(MAYBE_ROUTE_TEXTURE, split_position, route_level, "Maybe", "Detour to portal")
 			else:
-				_add_sign(BAD_ROUTE_TEXTURE, split_position, route_level, "Bad")
+				_add_sign(BAD_ROUTE_TEXTURE, split_position, route_level, "Bad", "Dead end")
 
 func _can_reach_goal(graph: Dictionary, route_id: int, goal_id: int) -> bool:
 	var result: Dictionary = PlatformGraphValidator.validate_path(
@@ -55,7 +57,7 @@ func _clear_signs() -> void:
 		remove_child(child)
 		child.queue_free()
 
-func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, sign_name: String) -> void:
+func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, sign_name: String, destination: String) -> void:
 	var sign := Sprite2D.new()
 	sign.name = "%sRoute" % sign_name
 	sign.texture = texture
@@ -65,3 +67,19 @@ func _add_sign(texture: Texture2D, split_position: Vector2, route_level: int, si
 	sign.position = (split_position + Vector2(SIGN_X_OFFSET, floor_y - texture.get_height())).snapped(GRID_SIZE)
 	sign.z_index = 10
 	add_child(sign)
+	var row: int = PREVIEW_ROWS[route_level]
+	var icon := Sprite2D.new()
+	icon.texture = texture
+	icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	icon.position = split_position + Vector2(-960, -24 + row * 34)
+	icon.scale = Vector2.ONE * 0.5
+	icon.z_index = 10
+	add_child(icon)
+	var caption := Label.new()
+	caption.text = "%s · %s" % [LANE_NAMES[row], destination]
+	caption.position = icon.position + Vector2(16, -16)
+	caption.add_theme_font_size_override("font_size", 22)
+	caption.add_theme_constant_override("outline_size", 5)
+	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	caption.z_index = 10
+	add_child(caption)

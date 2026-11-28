@@ -16,13 +16,13 @@ tile_map_data = PackedByteArray("AADe/+b/AAABAAEAAADe/+f/AAABAAEAAADe/+j/AAABAAE
 [node name="BladeWall40" type="Node2D" parent="."]
 
 [node name="Saw" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(320, 480)
+position = Vector2(288, 480)
 
 [node name="Saw2" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(320, 544)
+position = Vector2(288, 544)
 
 [node name="Saw3" parent="BladeWall40" instance=ExtResource("Saw")]
-position = Vector2(320, 608)
+position = Vector2(288, 608)
 
 [node name="HighWireUpper9" type="Node2D" parent="."]
 
@@ -55,11 +55,8 @@ position = Vector2(-64, -480)
 [node name="Coin3" parent="CheckpointUpper26" instance=ExtResource("Coin")]
 position = Vector2(32, -480)
 
-[node name="Board" parent="CheckpointUpper26" instance=ExtResource("Board")]
-position = Vector2(96, -512)
-
 [node name="Coin4" parent="CheckpointUpper26" instance=ExtResource("Coin")]
-position = Vector2(96, -544)
+position = Vector2(96, -480)
 
 [node name="StairCacheUpper43" type="Node2D" parent="."]
 
@@ -85,3 +82,9 @@ position = Vector2(832, -480)
 
 [node name="Ore" parent="PayChest6" instance=ExtResource("Ore")]
 position = Vector2(896, -480)
+
+[node name="PitBlade1" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(288, 512)
+
+[node name="PitBlade2" parent="BladeWall40" instance=ExtResource("Saw")]
+position = Vector2(288, 576)

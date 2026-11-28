@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4]
+[gd_scene load_steps=12 format=4]
 
 [ext_resource type="Texture2D" path="res://Assets/Chunks/Seamless/UpperMiddleStraight.png" id="1_ujm33"]
 [ext_resource type="PackedScene" path="res://scenes/tile_map_layer.tscn" id="2_i8a7n"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://scripts/collectible.gd" id="8_5skcq"]
 [ext_resource type="PackedScene" path="res://scenes/Interactables/Gem.tscn" id="9_v8y7l"]
 [ext_resource type="Script" path="res://scripts/gem.gd" id="10_80ag4"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/WideLanding.tscn" id="WideLanding"]
+[ext_resource type="PackedScene" path="res://scenes/Platforms/SlideCue.tscn" id="SlideCue"]
 
 [node name="TwinGauntlet01" type="Node2D"]
 
@@ -22,17 +24,17 @@ tile_map_data = PackedByteArray("AADv/wgAAAABAAAAAADv/wkAAAABAAEAAADv/woAAAABAAE
 
 [node name="Upper_Gauntlet" type="Node2D" parent="."]
 
-[node name="Landing01" type="StaticBody2D" parent="Upper_Gauntlet" instance=ExtResource("4_5f0jo")]
+[node name="Landing01" type="StaticBody2D" parent="Upper_Gauntlet" instance=ExtResource("WideLanding")]
 position = Vector2(-704, -448)
 collision_layer = 2
 collision_mask = 0
 
-[node name="Landing02" type="StaticBody2D" parent="Upper_Gauntlet" instance=ExtResource("4_5f0jo")]
+[node name="Landing02" type="StaticBody2D" parent="Upper_Gauntlet" instance=ExtResource("WideLanding")]
 position = Vector2(-544, -512)
 collision_layer = 2
 collision_mask = 0
 
-[node name="Landing03" type="StaticBody2D" parent="Upper_Gauntlet" instance=ExtResource("4_5f0jo")]
+[node name="Landing03" type="StaticBody2D" parent="Upper_Gauntlet" instance=ExtResource("WideLanding")]
 position = Vector2(-384, -480)
 collision_layer = 2
 collision_mask = 0
@@ -44,16 +46,9 @@ collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
 
-[node name="PitSawFillLeft" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
-z_index = 15
-position = Vector2(-816, -352)
-collision_layer = 0
-monitorable = false
-script = ExtResource("6_tuoxl")
-
 [node name="PitSawFill1" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
 z_index = 15
-position = Vector2(-656, -352)
+position = Vector2(-640, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -67,7 +62,7 @@ script = ExtResource("6_tuoxl")
 
 [node name="PitSawFill2" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
 z_index = 15
-position = Vector2(-496, -352)
+position = Vector2(-480, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -81,7 +76,7 @@ script = ExtResource("6_tuoxl")
 
 [node name="PitSawFillRight" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
 z_index = 15
-position = Vector2(-336, -352)
+position = Vector2(-320, -352)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -173,7 +168,7 @@ script = ExtResource("6_tuoxl")
 
 [node name="JumpArcCoins1" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("7_0fo2f")]
 z_index = 21
-position = Vector2(320, -544)
+position = Vector2(256, -512)
 collision_layer = 0
 script = ExtResource("8_5skcq")
 
@@ -185,7 +180,7 @@ script = ExtResource("8_5skcq")
 
 [node name="JumpArcCoins3" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("7_0fo2f")]
 z_index = 21
-position = Vector2(384, -544)
+position = Vector2(448, -512)
 collision_layer = 0
 script = ExtResource("8_5skcq")
 
@@ -226,16 +221,10 @@ script = ExtResource("8_5skcq")
 
 [node name="Middle_ClimbAndSlide" type="Node2D" parent="."]
 
-[node name="Step1" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("4_5f0jo")]
+[node name="Step1" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("WideLanding")]
 position = Vector2(-704, 128)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins11" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-736, 96)
-collision_layer = 0
-script = ExtResource("8_5skcq")
 
 [node name="StepCoins12" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
 z_index = 21
@@ -243,22 +232,10 @@ position = Vector2(-704, 96)
 collision_layer = 0
 script = ExtResource("8_5skcq")
 
-[node name="StepCoins13" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-672, 96)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="Step2" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("4_5f0jo")]
+[node name="Step2" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("WideLanding")]
 position = Vector2(-544, 64)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins21" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-576, 32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
 
 [node name="StepCoins22" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
 z_index = 21
@@ -266,22 +243,10 @@ position = Vector2(-544, 32)
 collision_layer = 0
 script = ExtResource("8_5skcq")
 
-[node name="StepCoins23" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-512, 32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="Step3" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("4_5f0jo")]
+[node name="Step3" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("WideLanding")]
 position = Vector2(-384, 0)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins31" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-416, -32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
 
 [node name="StepCoins32" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
 z_index = 21
@@ -289,55 +254,14 @@ position = Vector2(-384, -32)
 collision_layer = 0
 script = ExtResource("8_5skcq")
 
-[node name="StepCoins33" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-352, -32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="Step4" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("4_5f0jo")]
-position = Vector2(-224, 64)
+[node name="Step5" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("WideLanding")]
+position = Vector2(-96, 128)
 collision_layer = 2
 collision_mask = 0
-
-[node name="StepCoins41" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-256, 32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="StepCoins42" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-224, 32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="StepCoins43" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-192, 32)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="Step5" type="StaticBody2D" parent="Middle_ClimbAndSlide" instance=ExtResource("4_5f0jo")]
-position = Vector2(-64, 128)
-collision_layer = 2
-collision_mask = 0
-
-[node name="StepCoins51" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-96, 96)
-collision_layer = 0
-script = ExtResource("8_5skcq")
 
 [node name="StepCoins52" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
 z_index = 21
-position = Vector2(-64, 96)
-collision_layer = 0
-script = ExtResource("8_5skcq")
-
-[node name="StepCoins53" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("7_0fo2f")]
-z_index = 21
-position = Vector2(-32, 96)
+position = Vector2(-96, 96)
 collision_layer = 0
 script = ExtResource("8_5skcq")
 
@@ -357,7 +281,7 @@ script = ExtResource("6_tuoxl")
 
 [node name="PitSawFill1" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
 z_index = 15
-position = Vector2(-624, 224)
+position = Vector2(-608, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -371,7 +295,7 @@ script = ExtResource("6_tuoxl")
 
 [node name="PitSawFill2" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
 z_index = 15
-position = Vector2(-400, 224)
+position = Vector2(-384, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -385,7 +309,7 @@ script = ExtResource("6_tuoxl")
 
 [node name="PitSawFill3" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
 z_index = 15
-position = Vector2(-176, 224)
+position = Vector2(-160, 224)
 collision_layer = 0
 monitorable = false
 script = ExtResource("6_tuoxl")
@@ -462,3 +386,184 @@ z_index = 21
 position = Vector2(960, 96)
 collision_layer = 0
 script = ExtResource("8_5skcq")
+
+[node name="PitBlade1" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-704, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade2" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-672, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade3" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-608, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade4" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-544, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade5" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-512, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade6" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-448, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade7" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-384, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade8" type="Area2D" parent="Upper_Gauntlet" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-352, -352)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade9" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-704, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade10" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-672, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade11" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-640, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade12" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-576, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade13" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-544, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade14" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-480, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade15" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-448, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade16" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-416, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade17" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-352, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade18" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-320, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade19" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-256, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade20" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-224, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade21" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-192, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade22" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-128, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade23" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-96, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade24" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(-32, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="PitBlade25" type="Area2D" parent="Middle_ClimbAndSlide" instance=ExtResource("5_smula")]
+z_index = 15
+position = Vector2(0, 224)
+collision_layer = 0
+monitorable = false
+script = ExtResource("6_tuoxl")
+
+[node name="SlideCue1" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(-128, -548)
+
+[node name="SlideCue2" parent="." instance=ExtResource("SlideCue")]
+position = Vector2(64, 28)
